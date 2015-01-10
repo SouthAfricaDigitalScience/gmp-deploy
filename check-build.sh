@@ -1,5 +1,5 @@
 module load ci
-echo "minor"
+echo ""
 cd $WORKSPACE/$NAME-$VERSION
 make check
 
