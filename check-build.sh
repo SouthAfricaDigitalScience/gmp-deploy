@@ -1,3 +1,4 @@
+module load ci
 cd $WORKSPACE/$NAME-$VERSION
 make check
 
