@@ -1,5 +1,8 @@
 cd $WORKSPACE/$NAME-$VERSION
 make check
+
+echo $?
+
 make install DESTDIR=$WORKSPACE/build
 
 mkdir -p $REPO_DIR
