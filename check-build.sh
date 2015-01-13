@@ -5,7 +5,7 @@ make check
 
 echo $?
 
-make install DESTDIR=$SOFT_DIR
+make install # DESTDIR=$SOFT_DIR
 
 mkdir -p $REPO_DIR
 rm -rf $REPO_DIR/*
