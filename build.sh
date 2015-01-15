@@ -24,8 +24,8 @@ if [[ ! -e $SRC_DIR/$SOURCE_FILE ]] ; then
   wget http://mirror.ufs.ac.za/gnu/gnu/gmp/$SOURCE_FILE -O $SRC_DIR/$SOURCE_FILE
 else
   echo "continuing from previous builds, using source at " $SRC_DIR/$SOURCE_FILE
-   tar -xvzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
 fi
+tar -xvzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
 cd $WORKSPACE/$NAME-$VERSION
 ./configure --prefix $SOFT_DIR
 make -j 8
