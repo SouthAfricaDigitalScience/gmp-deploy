@@ -6,10 +6,11 @@ make check
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
-
+DIRS=`ls $SOFT_DIR`
+echo "DIRS to include in the tarball are $DIRS"
 mkdir -p $REPO_DIR
 rm -rf $REPO_DIR/*
-tar -cvzf $REPO_DIR/build.tar.gz -C $SOFT_DIR *
+tar -cvzf $REPO_DIR/build.tar.gz -C $SOFT_DIR
 
 mkdir -p modules
 (
