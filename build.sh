@@ -27,7 +27,7 @@ if [[ ! -e $SRC_DIR/$SOURCE_FILE ]] ; then
 else
   echo "continuing from previous builds, using source at " $SRC_DIR/$SOURCE_FILE
 fi
-tar -xvzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
+tar -xvzf --skip-old-files $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
 cd $WORKSPACE/$NAME-$VERSION
 ./configure --prefix $SOFT_DIR
 make -j 8
