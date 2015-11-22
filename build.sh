@@ -1,7 +1,8 @@
 #!/bin/bash -e
+. /etc/profile.d/modules.sh
+module load ci
 SOURCE_FILE=$NAME-$VERSION.tar.gz
 
-module load ci
 
 echo "REPO_DIR is "
 echo $REPO_DIR
