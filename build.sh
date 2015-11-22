@@ -1,5 +1,6 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
+
 module load ci
 SOURCE_FILE=$NAME-$VERSION.tar.gz
 

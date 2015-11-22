@@ -1,3 +1,5 @@
+#!/bin/bash -e
+. /etc/profile.d/modules.sh
 module load ci
 echo ""
 cd $WORKSPACE/$NAME-$VERSION
