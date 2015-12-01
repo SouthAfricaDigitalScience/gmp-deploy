@@ -2,18 +2,13 @@
 . /etc/profile.d/modules.sh
 module load ci
 echo ""
-cd $WORKSPACE/$NAME-$VERSION
+cd ${WORKSPACE}/${NAME}-${VERSION}
 make check
 
 echo $?
 
 make install # DESTDIR=$SOFT_DIR
-DIRS=`ls $SOFT_DIR`
-echo "DIRS to include in the tarball are $DIRS"
-mkdir -p $REPO_DIR
-rm -rf $REPO_DIR/*
-tar -cvzf $REPO_DIR/build.tar.gz -C $SOFT_DIR $DIRS
-
+mkdir -p ${REPO_DIR}
 mkdir -p modules
 (
 cat <<MODULE_FILE
@@ -33,5 +28,5 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 MODULE_FILE
 ) > modules/$VERSION
 
-mkdir -p $LIBRARIES_MODULES/$NAME
-cp modules/$VERSION $LIBRARIES_MODULES/$NAME
+mkdir -p ${LIBRARIES_MODULES}/${NAME}
+cp modules/$VERSION ${LIBRARIES_MODULES}/${NAME}
