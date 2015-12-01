@@ -8,8 +8,7 @@ cd ${WORKSPACE}/${NAME}-${VERSION}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 ./configure --with-gnu-ld --prefix $SOFT_DIR
 make install
-DIRS=`ls $SOFT_DIR`
-
+mkdir -p ${LIBRARIES_MODULES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
