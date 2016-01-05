@@ -1,8 +1,10 @@
 #!/bin/bash -e
+
+
 . /etc/profile.d/modules.sh
 
-module load ci
-SOURCE_FILE=$NAME-$VERSION.tar.gz
+module add ci
+SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 
 
 echo "REPO_DIR is "
@@ -20,10 +22,9 @@ mkdir -p $SOFT_DIR
 
 #  Download the source file
 
-if [[ ! -e $SRC_DIR/$SOURCE_FILE ]] ; then
+if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
   touch  ${SRC_DIR}/${SOURCE_FILE}.lock
   echo "seems like this is the first build - let's get the source"
-  mkdir -p $SRC_DIR
   wget http://mirror.ufs.ac.za/gnu/gnu/gmp/$SOURCE_FILE -O $SRC_DIR/$SOURCE_FILE
   echo "releasing lock"
   rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
@@ -36,7 +37,8 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
-tar xvzf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
-cd ${WORKSPACE}/${NAME}-${VERSION}
-./configure --with-gnu-ld --prefix ${SOFT_DIR}
+tar xzf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
+mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+../configure --with-gnu-ld --prefix ${SOFT_DIR}
 make -j 8

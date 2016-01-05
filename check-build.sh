@@ -1,8 +1,7 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
 module load ci
-echo ""
-cd ${WORKSPACE}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 make check
 
 echo $?
