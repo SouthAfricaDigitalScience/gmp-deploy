@@ -4,10 +4,10 @@
 echo ${SOFT_DIR}
 module add deploy
 echo ${SOFT_DIR}
-cd ${WORKSPACE}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 ./configure --with-gnu-ld --prefix ${SOFT_DIR}
-make install
+make install -j2
 echo "Creating the modules file directory ${LIBRARIES_MODULES}"
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 (
@@ -25,5 +25,7 @@ setenv GMP_VERSION       $VERSION
 setenv GMP_DIR           $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
 prepend-path LD_LIBRARY_PATH   $::env(GMP_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
+prepend-path CFLAGS            "-I${GMP_DIR}/include"
+prepend-path LDFLAGS           "-L${GMP_DIR}/lib"
 MODULE_FILE
 ) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}
