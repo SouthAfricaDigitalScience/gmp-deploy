@@ -37,5 +37,5 @@ fi
 tar xzf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
-../configure --with-gnu-ld --prefix ${SOFT_DIR}
+../configure --with-gnu-ld --prefix=${SOFT_DIR}
 make -j 2

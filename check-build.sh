@@ -6,7 +6,7 @@ make check
 
 echo $?
 
-make install # DESTDIR=$SOFT_DIR
+make install
 mkdir -p ${REPO_DIR}
 mkdir -p modules
 (
