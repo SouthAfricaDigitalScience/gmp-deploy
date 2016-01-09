@@ -6,7 +6,7 @@ module add deploy
 echo ${SOFT_DIR}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
-./configure --with-gnu-ld --prefix=${SOFT_DIR}
+../configure --with-gnu-ld --prefix=${SOFT_DIR}
 make install -j2
 echo "Creating the modules file directory ${LIBRARIES_MODULES}"
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
