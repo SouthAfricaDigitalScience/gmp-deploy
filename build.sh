@@ -2,7 +2,7 @@
 . /etc/profile.d/modules.sh
 
 module add ci
-SOURCE_FILE=${NAME}-${VERSION}.tar.gz
+SOURCE_FILE=${NAME}-${VERSION}.tar.bz2
 
 echo "REPO_DIR is "
 echo $REPO_DIR
@@ -34,7 +34,7 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
-tar xzf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
+tar jzf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 ../configure ABI=64 \
