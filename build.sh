@@ -1,6 +1,6 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
-
+module avail
 module add ci
 SOURCE_FILE=${NAME}-${VERSION}.tar.bz2
 
