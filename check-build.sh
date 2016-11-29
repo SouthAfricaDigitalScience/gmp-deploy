@@ -29,5 +29,5 @@ prepend-path LDFLAGS           "-L${GMP_DIR}/lib"
 MODULE_FILE
 ) > modules/$VERSION
 
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/$VERSION ${LIBRARIES_MODULES}/${NAME}
+mkdir -vp ${LIBRARIES_MODULES}/${NAME}
+cp -v modules/$VERSION ${LIBRARIES_MODULES}/${NAME}
