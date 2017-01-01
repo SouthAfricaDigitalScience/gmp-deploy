@@ -3,7 +3,7 @@
 module avail
 module add ci
 SOURCE_FILE=${NAME}-${VERSION}.tar.bz2
-
+whoami
 echo "REPO_DIR is "
 echo $REPO_DIR
 echo "SRC_DIR is "
