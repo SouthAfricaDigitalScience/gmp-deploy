@@ -1,4 +1,4 @@
-[![Build Status](http://ci.sagrid.ac.za/job/gmp-deploy/badge/icon)](http://ci.sagrid.ac.za/job/gmp-deploy/)
+[![Build Status](https://ci.sagrid.ac.za/job/gmp-deploy/badge/icon)](https://ci.sagrid.ac.za/job/gmp-deploy/)
 
 # gmp-deploy
 
@@ -13,6 +13,7 @@ This is a base node in the CODE-RADE dependency tree and has no upstream depende
 We build the following versions :
 
   * 6.1.2
+  
 # Configuration
 
 
