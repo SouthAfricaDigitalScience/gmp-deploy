@@ -13,8 +13,8 @@ echo "All tests have passed, will now build into ${SOFT_DIR}"
 --enable-shared \
 --prefix=${SOFT_DIR}
 make install -j2
-echo "Creating the modules file directory ${LIBRARIES_MODULES}"
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
+echo "Creating the modules file directory ${LIBRARIES}"
+mkdir -p ${LIBRARIES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
@@ -33,4 +33,4 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 prepend-path CFLAGS            "-I${GMP_DIR}/include"
 prepend-path LDFLAGS           "-L${GMP_DIR}/lib"
 MODULE_FILE
-) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}
+) > ${LIBRARIES}/${NAME}/${VERSION}

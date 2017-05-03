@@ -13,7 +13,7 @@ This is a base node in the CODE-RADE dependency tree and has no upstream depende
 We build the following versions :
 
   * 6.1.2
-  
+
 # Configuration
 
 
