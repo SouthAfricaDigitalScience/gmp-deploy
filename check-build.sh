@@ -39,8 +39,8 @@ setenv       GMP_VERSION       $VERSION
 setenv       GMP_DIR           /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
 prepend-path LD_LIBRARY_PATH   $::env(GMP_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
-prepend-path CFLAGS            "-I$(GMP_DIR)/include"
-prepend-path LDFLAGS           "-L$(GMP_DIR)/lib"
+prepend-path CFLAGS            "-I$::env(GMP_DIR)/include"
+prepend-path LDFLAGS           "-L$::env(GMP_DIR)/lib"
 MODULE_FILE
 ) > modules/$VERSION
 
