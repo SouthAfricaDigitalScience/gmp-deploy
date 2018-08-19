@@ -54,5 +54,6 @@ cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 ../configure ABI=64 \
 --with-gnu-ld \
 --enable-shared \
+--enable-static \
 --prefix=${SOFT_DIR}
 make -j 2

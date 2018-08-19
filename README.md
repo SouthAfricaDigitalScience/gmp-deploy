@@ -23,8 +23,10 @@ The builds are configured out-of-source with cmake :
 ../configure ABI=64 \
 --with-gnu-ld \
 --enable-shared \
+--enable-static \
 --prefix=${SOFT_DIR}
 make -j 2
 ```
 
 # Citing
+
