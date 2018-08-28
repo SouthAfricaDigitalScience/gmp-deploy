@@ -8,8 +8,9 @@ access_token = os.environ['ZENODO_API_KEY']
 headers = {"Content-Type": "application/json"}
 # login
 response = requests.get(uri,  params={'access_token': access_token })
+# get env
 # data will be sent as a parameter to the request
-data = { 'filename': '/tmp/gmp-6.1.2.tar.gz' }
+data = { 'filename': '/tmp/gmp-6.1.2-generic-sl6-x86_64.tar.gz' }
 metadata = {
           'metadata': {
           'upload_type': 'software',
@@ -25,7 +26,8 @@ metadata = {
           'description': 'See the README',
           'access_right': 'open',
           'license': 'Apache-2.0',
-          'prereserve_doi': 'true'
+          'prereserve_doi': 'true',
+          'communities': 'code-rade'
         }
       }
 
@@ -50,7 +52,7 @@ else:
 
 
 # files is an array of files to be sent as parameters to the request
-files = {'file': open('/tmp/gmp-6.1.2.tar.gz', 'rb')}
+files = {'file': open('/tmp/gmp-6.1.2-generic-sl6-x86_64.tar.gz', 'rb')}
 deposit = requests.post(uri + '/%s/files' % id,
                         params={'access_token': access_token},
                         data=data,
