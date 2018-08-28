@@ -2,9 +2,6 @@ pipeline{
     triggers {
         githubPush
     }
-    agent {
-        label 'x86 centos6'
-    }
     environment {
     OS = "sl6"
     SITE = "generic"
@@ -13,17 +10,14 @@ pipeline{
     VERSION = "6.1.2"
     }
 
-    node { // <1>
-    
-        stage('Build') { // <2>
+    stages { // <1>
+        stage('CheckOut')
+            scm CheckOut
+        stage('Build') {
+            agent {
+               label 'x86 centos6'
+            }
             sh 'build.sh' // <3>
-        }
-
-        stage('Test') { // <4>
-            sh 'check-build.sh'
-        }
-        stage('Deploy') {
-            sh 'build.sh'
         }
     }
 }
