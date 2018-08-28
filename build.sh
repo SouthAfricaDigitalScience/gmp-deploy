@@ -53,7 +53,10 @@ mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 ../configure ABI=64 \
 --with-gnu-ld \
---enable-shared \
---enable-static \
+--enable-static=yes \
+--enable-shared=yes \
+--build=x86_64 \
+--host=x86_64-pc-linux-gnu \
+--enable-cxx=yes \
 --prefix=${SOFT_DIR}
-make -j 2
+make -j2
