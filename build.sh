@@ -58,5 +58,6 @@ cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 --build=x86_64 \
 --host=x86_64-pc-linux-gnu \
 --enable-cxx=yes \
+--enable-fat \
 --prefix=${SOFT_DIR}
 make -j2

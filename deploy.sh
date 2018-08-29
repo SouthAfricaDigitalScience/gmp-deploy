@@ -10,9 +10,14 @@ cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 ../configure ABI=64 \
 --with-gnu-ld \
---enable-shared \
+--enable-static=yes \
+--enable-shared=yes \
+--build=x86_64 \
+--host=x86_64-pc-linux-gnu \
+--enable-cxx=yes \
+--enable-fat \
 --prefix=${SOFT_DIR}
-make install -j2
+make -j2
 echo "Creating the modules file directory ${LIBRARIES}"
 mkdir -p ${LIBRARIES}/${NAME}
 (
