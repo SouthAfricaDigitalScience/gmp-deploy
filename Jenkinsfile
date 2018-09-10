@@ -6,10 +6,7 @@ pipeline {
         docker {
           image 'quay.io/aaroc/code-rade-centos6:latest'
         }
-
       }
-  stages {
-    stage('build') {
       environment {
         HOME = '/home/jenkins'
         VERSION = '6.1.2'
