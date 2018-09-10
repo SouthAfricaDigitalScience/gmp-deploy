@@ -1,8 +1,8 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('sanity') {
-            agent any
+            agent master
             steps {
                 sh 'echo "hi"'
             }
@@ -14,6 +14,7 @@ pipeline {
                         docker {
                             image 'quay.io/aaroc/code-rade-centos6'
                             label 'centos6'
+                            entrypoint '/usr/local/sbin/sshd -D -p 22'
                         }
                     }
                     environment {
@@ -22,7 +23,8 @@ pipeline {
                         SITE = "generic"
                         ARCH = "x86_64"
                     }
-                    steps('Build') {
+                    steps {
+                        echo "building"
                         sh './build.sh'
                     }
                 }

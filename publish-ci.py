@@ -11,6 +11,7 @@ response = requests.get(uri,  params={'access_token': access_token })
 # get env
 # data will be sent as a parameter to the request
 data = { 'filename': '/tmp/gmp-6.1.2-generic-sl6-x86_64.tar.gz' }
+# TODO - load from file
 metadata = {
           'metadata': {
           'upload_type': 'software',
