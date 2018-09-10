@@ -7,7 +7,7 @@ pipeline {
                 sh 'echo "hi"'
             }
         }
-        stage('Build') {
+        stage('compile') {
             agent {
                 docker {
                     image 'quay.io/aaroc/code-rade-centos6'
