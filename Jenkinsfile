@@ -8,45 +8,26 @@ pipeline {
                 
             }
         }
-        
         stage('compile') {
-            parallel {
-                stage('centos6') {
-                    agent {
-                        docker {
-                            image 'quay.io/aaroc/code-rade-centos6'
-                            label 'centos6'
-                        }
+            node('centos6') {
+                agent {
+                    docker {
+                        image 'quay.io/aaroc/code-rade-centos6'
+                        label 'centos6'
                     }
-                    environment {
-                        VERSION = "6.1.2"
-                        OS = "centos6"
-                        SITE = "generic"
-                        ARCH = "x86_64"
-                    }
-                    steps {
+                    label 'centos6'
+                }
+                environment {
+                    VERSION = "6.1.2"
+                    OS = "centos6"
+                    SITE = "generic"
+                    ARCH = "x86_64"
+                }
+                steps {
                         echo "building"
                         sh './build.sh'
                     }
-                }
-                stage('centos7') {
-                    agent {
-                        docker {
-                            image 'quay.io/aaroc/code-rade-centos7'
-                            label 'centos7'
-                        }
-                    }
-                    environment {
-                        VERSION = "6.1.2"
-                        OS = "centos7"
-                        SITE = "generic"
-                        ARCH = "x86_64"
-                    }
-                    steps {
-                        echo "building"
-                        sh './build.sh'
-                    }
-                }
+                } // node
              } // parallel
         }  // Build stage
     } // stages
