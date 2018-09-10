@@ -8,20 +8,24 @@ pipeline {
             }
         }
         stage('Build') {
-            parallel centos6: {
-                node('centos6') {
+            parallel {
+                stage('centos6') {
+                    agent {
+                        label 'centos6'
+                    }
                     steps('Build') {
                         sh './build.sh'
                     }
                 }
-            },
-            centos7: {
-                node('centos7') {
+                stage('centos7') {
+                    agent {
+                        label 'centos7'
+                    }
                     steps('Build') {
                         sh './build.sh'
                     }
                 }
-            }
-        }  // stage
+            } // parallel
+        }  // Build stage
     } // stages
 } // pipeline
