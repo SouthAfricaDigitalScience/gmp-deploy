@@ -1,78 +1,22 @@
 pipeline {
   agent none
   stages {
-    stage('sanity') {
-      parallel {
-        stage('sanity centos6') {
-          agent {
-            docker {
-              image 'quay.io/aaroc/code-rade-centos6'
-              label 'centos6'
-            }
-          }
-          environment {
-            HOME = '/home/jenkins/'
-          }
-          steps {
-            node(label: 'centos6') {
-              echo 'node allocated'
-              fileExists 'build.sh'
-              fileExists 'check-build.sh'
-              fileExists 'deploy.sh'
-            }
-
-          }
-        }
-        stage('sanity centos7') {
-          agent {
-            docker {
-              image 'quay.io/aaroc/code-rade-centos7'
-              label 'centos7'
-            }
-
-          }
-          environment {
-            HOME = '/home/jenkins'
-          }
-          steps {
-            fileExists 'build.sh'
-            node(label: 'centos7')
-          }
-        }
-      }
-    }
     stage('build') {
-      parallel {
-        stage('build centos6') {
-          agent {
-            node {
-              label 'centos6'
-            }
-
-          }
-          environment {
-            HOME = '/home/jenkins/'
-          }
-          steps {
-            sh './build.sh'
-          }
+      agent {
+        docker {
+          image 'quay.io/aaroc/code-rade-centos6:latest'
         }
-        stage('build centos7') {
-          agent {
-            node {
-              label 'centos7'
-            }
 
-          }
-          steps {
-            sh './build.sh'
-          }
-        }
       }
-    }
-    stage('test') {
+      environment {
+        HOME = '/home/jenkins'
+        VERSION = '6.1.2'
+        OS = 'centos6'
+        SITE = 'generic'
+        NAME = 'gmp'
+      }
       steps {
-        sh './check-build.sh'
+        sh 'ls'
       }
     }
   }
