@@ -1,16 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'quay.io/aaroc/code-rade-centos6'
-            label 'centos6'
-        }
-    }
-    agent {
-        docker {
-            image 'quay.io/aaroc/code-rade-centos7'
-            label 'centos7'
-        }
-    }
+    agent any
     stages {
         stage('sanity') {
             agent any
@@ -19,9 +8,22 @@ pipeline {
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    image 'quay.io/aaroc/code-rade-centos6'
+                    label 'centos6'
+                }
+            }
+            agent {
+                docker {
+                    image 'quay.io/aaroc/code-rade-centos7'
+                    label 'centos7'
+                }
+            }
             parallel {
                 stage('centos6') {
                     node('centos6')
+
                     steps('Build') {
                         sh './build.sh'
                     }
