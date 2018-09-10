@@ -1,6 +1,5 @@
 pipeline {
     agent none
-    node('centos6') {
     stages {
         stage('sanity') {
             agent any
@@ -29,5 +28,4 @@ pipeline {
                 }
             }  // Build stage
         } // stages
-    } // node
 } // pipeline
