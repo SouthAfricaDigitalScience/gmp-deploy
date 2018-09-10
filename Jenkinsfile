@@ -1,7 +1,7 @@
 pipeline {
   agent none
-  stages {
-    node('x86_64 centos6') { 
+  node('x86_64 centos6') { 
+    stages {
       stage('Build') {
         environment {
           OS = 'centos6'
