@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'quay.io/aaroc/code-rade-centos6:latest'
-      args '-P '
-    }
-  }
+  agent { label 'master' }
   stages {
     stage('Build') {
       environment {
@@ -12,6 +7,12 @@ pipeline {
         NAME = 'gmp'
         VERSION = '6.1.2'
         ARCH = 'x86_64'
+      }
+      agent {
+        docker {
+          image 'quay.io/aaroc/code-rade-centos6:latest'
+          args '-P '
+        }
       }
       steps {
         sh './build'
@@ -23,6 +24,12 @@ pipeline {
         NAME = 'gmp'
         VERSION = '6.1.2'
         ARCH = 'x86_64'
+      }
+      agent {
+        docker {
+          image 'quay.io/aaroc/code-rade-centos6:latest'
+          args '-P '
+        }
       }
       steps {
         sh './check-build.sh'
