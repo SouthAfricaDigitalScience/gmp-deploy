@@ -1,19 +1,14 @@
 pipeline {
-  agent {
-    docker {
-      image 'quay.io/aaroc/code-rade-centos6:latest'
-    }
-
-  }
+  agent none
   stages {
     stage('sanity') {
       parallel {
         stage('sanity centos6') {
           agent {
             docker {
-              image 'quay.io/aaroc/code-rade-centos7'
+              image 'quay.io/aaroc/code-rade-centos6'
+              label 'centos6'
             }
-
           }
           environment {
             HOME = '/home/jenkins/'
@@ -32,6 +27,7 @@ pipeline {
           agent {
             docker {
               image 'quay.io/aaroc/code-rade-centos7'
+              label 'centos7'
             }
 
           }
