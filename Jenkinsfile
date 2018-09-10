@@ -28,7 +28,6 @@ pipeline {
                         sh './build.sh'
                     }
                 } // node
-             } // parallel
         }  // Build stage
     } // stages
 } // pipeline
