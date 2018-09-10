@@ -2,11 +2,13 @@ pipeline {
     agent none
     stages {
         stage('sanity') {
-            agent master
+            agent any
             steps {
                 sh 'echo "hi"'
+                
             }
         }
+        
         stage('compile') {
             parallel {
                 stage('centos6') {
@@ -19,6 +21,24 @@ pipeline {
                     environment {
                         VERSION = "6.1.2"
                         OS = "centos6"
+                        SITE = "generic"
+                        ARCH = "x86_64"
+                    }
+                    steps {
+                        echo "building"
+                        sh './build.sh'
+                    }
+                }
+                stage('centos7') {
+                    agent {
+                        docker {
+                            image 'quay.io/aaroc/code-rade-centos7'
+                            label 'centos7'
+                        }
+                    }
+                    environment {
+                        VERSION = "6.1.2"
+                        OS = "centos7"
                         SITE = "generic"
                         ARCH = "x86_64"
                     }
