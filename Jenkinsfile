@@ -1,8 +1,8 @@
 pipeline {
   agent none
   stages {
-    stage('Build') {
-      node('x86_64 centos6') { 
+    node('x86_64 centos6') { 
+      stage('Build') {
         environment {
           OS = 'centos6'
           NAME = 'gmp'
