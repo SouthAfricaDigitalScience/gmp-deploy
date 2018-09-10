@@ -1,11 +1,12 @@
 pipeline {
-  agent {
+  agent Jenkins
+  stages {
+    agent {
         docker {
           image 'quay.io/aaroc/code-rade-centos6:latest'
         }
 
       }
-  stages {
     stage('build') {
       environment {
         HOME = '/home/jenkins'
