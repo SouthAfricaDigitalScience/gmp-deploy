@@ -1,12 +1,18 @@
 pipeline {
   agent {
+    docker {
+      image 'quay.io/aaroc/code-rade-centos6:latest'
+    }
+
+  }
+  stages {
+    stage('build') {
+      agent {
         docker {
-          image 'quay.io/aaroc/code-rade-centos6:latest'
+          image 'quay.io/aaroc/code-rade-centos6'
         }
 
       }
-  stages {
-    stage('build') {
       environment {
         HOME = '/home/jenkins'
         VERSION = '6.1.2'
