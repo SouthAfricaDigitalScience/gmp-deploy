@@ -22,19 +22,18 @@ pipeline {
             }
             parallel {
                 stage('centos6') {
+                    environment {
+                        VERSION = "6.1.2"
+                        OS = "centos6"
+                        SITE = "generic"
+                        ARCH = "x86_64"
+                    }
                     node('centos6')
-
                     steps('Build') {
                         sh './build.sh'
                     }
                 }
-                stage('centos7') {
-                    node('centos7')
-                    steps('Build') {
-                        sh './build.sh'
-                    }
-                }
-            } // parallel
+             } // parallel
         }  // Build stage
     } // stages
 } // pipeline
