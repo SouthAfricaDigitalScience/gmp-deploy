@@ -1,26 +1,23 @@
 pipeline {
   agent {
-    node {
-      label 'centos6'
+    docker {
+      image 'quay.io/aaroc/code-rade-centos6:latest'
     }
   }
   stages {
-    stage('sanity') {
-      environment {
-        VERSION = '6.1.2'
-        OS = 'centos6'
-        SITE = 'generic'
-        ARCH = 'x86_64'
-      }
-      agent { 
-          docker {
-              reuseNode true
-              image 'quay.io/aaroc/code-rade-centos6'
-          }
-      }
+    stage('build') {
       steps {
-        sh 'echo "hi"'
         sh './build.sh'
+      }
+    }
+    stage('test') {
+      steps {
+        sh './check-build.sh'
+      }
+    }
+    stage('deploy') {
+      steps {
+        sh './deploy.sh'
       }
     }
   }
