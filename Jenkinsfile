@@ -22,7 +22,6 @@ pipeline {
                         SITE = "generic"
                         ARCH = "x86_64"
                     }
-                    node('centos6')
                     steps('Build') {
                         sh './build.sh'
                     }
