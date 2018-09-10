@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'master' }
+  agent none
   stages {
     stage('Build') {
       environment {
@@ -8,42 +8,11 @@ pipeline {
         VERSION = '6.1.2'
         ARCH = 'x86_64'
       }
-      agent {
-        docker {
-          image 'quay.io/aaroc/code-rade-centos6:latest'
-          args '-P '
+      node('x86_64 centos6') { 
+        steps {
+          sh './build.sh'
+          sh './check-build.sh'
         }
-      }
-      steps {
-        sh './build'
-      }
-    }
-    stage('Test') {
-      environment {
-        OS = 'centos6'
-        NAME = 'gmp'
-        VERSION = '6.1.2'
-        ARCH = 'x86_64'
-      }
-      agent {
-        docker {
-          image 'quay.io/aaroc/code-rade-centos6:latest'
-          args '-P '
-        }
-      }
-      steps {
-        sh './check-build.sh'
-      }
-    }
-    stage('Deliver') {
-      environment {
-        OS = 'centos6'
-        NAME = 'gmp'
-        VERSION = '6.1.2'
-        ARCH = 'x86_64'
-      }
-      steps {
-        sh './deploy'
       }
     }
   }
