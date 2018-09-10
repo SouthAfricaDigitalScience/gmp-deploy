@@ -14,7 +14,6 @@ pipeline {
                         docker {
                             image 'quay.io/aaroc/code-rade-centos6'
                             label 'centos6'
-                            entrypoint '/usr/local/sbin/sshd -D -p 22'
                         }
                     }
                     environment {
