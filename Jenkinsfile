@@ -192,6 +192,9 @@ pipeline {
     } // stage test
   } // stages
   post {
+    agent {
+      label 'master'
+    }
     always {
       echo 'One way or another, I have finished'
       deleteDir() /* clean up our workspace */
