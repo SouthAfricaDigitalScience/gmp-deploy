@@ -8,6 +8,11 @@ pipeline {
     NAME = 'gmp'
   }
   stages {
+    stage('trepidation') {
+      steps {
+          echo giphySearch(credentialsId: 'giphy', keyword: 'scared', rating: 'r').toString()
+      }
+    }
     stage('sanity') {
       agent { label 'centos6' }
       steps {
