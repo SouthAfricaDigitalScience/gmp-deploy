@@ -1,5 +1,7 @@
 pipeline {
-  agent none
+  agent {
+    label 'master'
+  }
   environment {
     ARCH = 'x86_64'
     SITE = 'generic'
@@ -192,12 +194,10 @@ pipeline {
     } // stage test
   } // stages
   post {
-    agent {
-      label 'master'
-    }
     always {
       echo 'One way or another, I have finished'
       deleteDir() /* clean up our workspace */
+      archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
     }
     success {
       slackSend channel: '#gmp-code-rade',
