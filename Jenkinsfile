@@ -9,9 +9,14 @@ pipeline {
   }
   stages {
     stage('sanity') {
-      fileExists 'build.sh'
-      fileExists 'check-build.sh'
-      fileExists 'deploy.sh'
+      agent {
+        label 'master'
+      }
+      steps {
+        fileExists 'build.sh'
+        fileExists 'check-build.sh'
+        fileExists 'deploy.sh'
+      }
     }
     stage('build') {
       parallel {
