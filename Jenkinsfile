@@ -201,5 +201,10 @@ pipeline {
       color: 'good',
       message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
     }
+    failure {
+      slackSend channel: '#gmp-code-rade',
+      color: 'bad',
+      message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+    }
   }
 }
