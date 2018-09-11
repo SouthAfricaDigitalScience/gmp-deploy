@@ -94,9 +94,19 @@ pipeline {
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
             sh './build.sh'
-          }
-        }
+          } // steps
+        } // stage
+      } // parallel
+    } // stage build
+    post {
+      always {
+        echo 'One way or another, I have finished'
+        deleteDir() /* clean up our workspace */
       }
+      success {
+        slackSend channel: '#gmp-code-rade',
+        color: 'good',
+        message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
     }
   }
 }
