@@ -11,7 +11,6 @@ pipeline {
         }
         stage('build on centos7') {
           agent { label "sl7" }
-          }
           steps {
             sh './build.sh'
           }
