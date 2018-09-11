@@ -9,9 +9,6 @@ pipeline {
   }
   stages {
     stage('sanity') {
-      agent {
-        label 'master'
-      }
       steps {
         fileExists 'build.sh'
         fileExists 'check-build.sh'
