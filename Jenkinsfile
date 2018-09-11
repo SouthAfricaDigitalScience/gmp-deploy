@@ -15,7 +15,6 @@ pipeline {
           steps {
             sh './build.sh'
           }
-        }
       }
     }
   }
