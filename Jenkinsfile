@@ -9,6 +9,7 @@ pipeline {
   }
   stages {
     stage('sanity') {
+      agent { label 'centos6' }
       steps {
         fileExists 'build.sh'
         fileExists 'check-build.sh'
