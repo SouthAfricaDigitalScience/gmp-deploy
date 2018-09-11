@@ -8,12 +8,18 @@ pipeline {
     NAME = 'gmp'
   }
   stages {
+    stage('sanity') {
+      fileExists 'build.sh'
+      fileExists 'check-build.sh'
+      fileExists 'deploy.sh'
+    }
     stage('build') {
       parallel {
         stage('build 6.1.2 on centos6') {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
+            WORKSPACE = '/home/jenkins/workspace/$NAME/'
           }
           agent { label "centos6" }
           steps {
