@@ -192,21 +192,21 @@ pipeline {
       } // parallel
     } // stage test
   } // stages
-  post {
-    always {
-      echo 'One way or another, I have finished'
-      deleteDir() /* clean up our workspace */
-      archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
-    }
-    success {
-      slackSend channel: '#gmp-code-rade',
-      color: 'good',
-      message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-    }
-    failure {
-      slackSend channel: '#gmp-code-rade',
-      color: 'bad',
-      message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-    }
-  }
+  // post {
+  //   always {
+  //     echo 'One way or another, I have finished'
+  //     deleteDir() /* clean up our workspace */
+  //     archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
+  //   }
+  //   success {
+  //     slackSend channel: '#gmp-code-rade',
+  //     color: 'good',
+  //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+  //   }
+  //   failure {
+  //     slackSend channel: '#gmp-code-rade',
+  //     color: 'bad',
+  //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+  //   }
+  // }
 }
