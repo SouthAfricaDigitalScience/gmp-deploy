@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label 'master'
-  }
+  agent none
   environment {
     ARCH = 'x86_64'
     SITE = 'generic'
