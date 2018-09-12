@@ -6,14 +6,6 @@ pipeline {
     NAME = 'gmp'
   }
   stages {
-    stage('sanity') {
-      agent { label 'centos6' }
-      steps {
-        fileExists 'build.sh'
-        fileExists 'check-build.sh'
-        fileExists 'deploy.sh'
-      }
-    }
     stage('build') {
       parallel {
         stage('build 6.1.2 on centos6') {
@@ -22,7 +14,7 @@ pipeline {
             VERSION = '6.1.2'
             WORKSPACE = '/home/jenkins/workspace/$NAME/'
           }
-          agent { label "centos6" }
+          agent { label 'centos6' }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
             sh './build.sh'
