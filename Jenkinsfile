@@ -113,7 +113,7 @@ pipeline {
         }
         stage('build 6.1.2 on ubuntu 1610') {
           environment {
-            OS = 'centos6'
+            OS = 'u1610'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
