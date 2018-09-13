@@ -264,12 +264,13 @@ pipeline {
       }
     }
   } // stages
-  // post {
-  //   always {
-  //     echo 'One way or another, I have finished'
-  //     deleteDir() /* clean up our workspace */
-  //     archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
-  //   }
+  post {
+    agent { label 'centos7' }
+    always {
+      echo 'One way or another, I have finished'
+      archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
+      deleteDir()
+    }
   //   success {
   //     slackSend channel: '#gmp-code-rade',
   //     color: 'good',
@@ -280,5 +281,5 @@ pipeline {
   //     color: 'bad',
   //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
   //   }
-  // }
+  }
 }

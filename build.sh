@@ -27,10 +27,6 @@ echo $WORKSPACE
 echo "SOFT_DIR is"
 echo $SOFT_DIR
 
-mkdir -p ${WORKSPACE}
-mkdir -p ${SRC_DIR}
-mkdir -p ${SOFT_DIR}
-
 #  Download the source file
 
 # if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
