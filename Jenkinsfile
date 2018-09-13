@@ -6,30 +6,31 @@ pipeline {
     NAME = 'gmp'
   }
   stages {
-    stage('cache tarball')
-    parallel {
-      stage ('6.1.2') {
-        environment {
-          VERSION='6.1.2'
-          SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
-          SRC_DIR = "${'/data/src' + env.NAME }"
+    stage('cache tarball') {
+      parallel {
+        stage ('6.1.2') {
+          environment {
+            VERSION='6.1.2'
+            SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
+            SRC_DIR = "${'/data/src' + env.NAME }"
+          }
+          agent { label 'centos7' }
+          steps {
+            sh 'mkdir -vp $SRC_DIR'
+            sh 'wget $SOURCE_FILE -O $SRC_DIR'
+          }
         }
-        agent { label 'centos7' }
-        steps {
-          sh 'mkdir -vp $SRC_DIR'
-          sh 'wget $SOURCE_FILE -O $SRC_DIR'
-        }
-      }
-      stage ('6.1.0') {
-        environment {
-          VERSION='6.1.0'
-          SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
-          SRC_DIR = "${'/data/src' + env.NAME }"
-        }
-        agent { label 'centos7' }
-        steps {
-          sh 'mkdir -vp $SRC_DIR'
-          sh 'wget $SOURCE_FILE -O $SRC_DIR'
+        stage ('6.1.0') {
+          environment {
+            VERSION='6.1.0'
+            SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
+            SRC_DIR = "${'/data/src' + env.NAME }"
+          }
+          agent { label 'centos7' }
+          steps {
+            sh 'mkdir -vp $SRC_DIR'
+            sh 'wget $SOURCE_FILE -O $SRC_DIR'
+          }
         }
       }
     }
