@@ -136,6 +136,7 @@ pipeline {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "centos6" }
           steps {
