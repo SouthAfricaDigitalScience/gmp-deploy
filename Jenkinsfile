@@ -46,7 +46,7 @@ pipeline {
           agent { label 'centos6' }
           steps {
             sh 'pwd'
-            sh 'echo $SITE $NAME $OS $ARCH $VERSION'
+            sh 'echo $SITE $NAME $OS $ARCH $VERSION $WORKSPACE'
             sh './build.sh'
             sh ''
           }
