@@ -17,7 +17,7 @@ pipeline {
           agent { label 'centos7' }
           steps {
             sh 'mkdir -vp $SRC_DIR'
-            sh 'wget $SOURCE_FILE -O $SRC_DIR'
+            sh 'wget $SOURCE_FILE -O $SRC_DIR/$SOURCE_FILE'
           }
         }
         stage ('6.1.0') {
@@ -29,7 +29,7 @@ pipeline {
           agent { label 'centos7' }
           steps {
             sh 'mkdir -vp $SRC_DIR'
-            sh 'wget $SOURCE_FILE -O $SRC_DIR'
+            sh 'wget $SOURCE_FILE -O $SRC_DIR/$SOURCE_DIR'
           }
         }
       }
