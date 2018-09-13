@@ -265,8 +265,8 @@ pipeline {
     }
   } // stages
   post {
-    agent { label 'centos7' }
     always {
+      agent { label 'centos7' }
       echo 'One way or another, I have finished'
       archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
       deleteDir()
