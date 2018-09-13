@@ -12,7 +12,7 @@ pipeline {
           environment {
             VERSION='6.1.2'
             SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
-            SRC_DIR = "${'/data/src' + env.NAME }"
+            SRC_DIR = "${'/data/src/' + env.NAME }"
           }
           agent { label 'centos7' }
           steps {
@@ -24,7 +24,7 @@ pipeline {
           environment {
             VERSION='6.1.0'
             SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
-            SRC_DIR = "${'/data/src' + env.NAME }"
+            SRC_DIR = "${'/data/src/' + env.NAME }"
           }
           agent { label 'centos7' }
           steps {
@@ -40,7 +40,7 @@ pipeline {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
-            WORKSPACE = "${'/home/jenkins/workspace/'env.NAME + '/' + env.VERSION + '/' + env.OS}"
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label 'centos6' }
           steps {
