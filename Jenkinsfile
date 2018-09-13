@@ -333,7 +333,7 @@ pipeline {
             retry(3) 
             skipDefaultCheckout() 
           }
-           agent { label "centos7"}
+           agent { label "centos7" }
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
              sh "python publish.py"
@@ -363,13 +363,13 @@ pipeline {
       }
     }
   } // stages
-  post {
-    always {
-      agent { label 'centos7' }
-      echo 'One way or another, I have finished'
-      archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
-      deleteDir()
-    }
+  // post {
+  //   always {
+  //     agent { label 'centos7' }
+  //     echo 'One way or another, I have finished'
+  //     archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
+  //     deleteDir()
+  //   }
   //   success {
   //     slackSend channel: '#gmp-code-rade',
   //     color: 'good',
