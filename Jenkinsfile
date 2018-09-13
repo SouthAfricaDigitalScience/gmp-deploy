@@ -140,6 +140,7 @@ pipeline {
     stage('test') {
       parallel {
         stage('test 6.1.2 on centos6') {
+          options { skipDefaultCheckout() }
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
@@ -237,6 +238,26 @@ pipeline {
         } // stage
       } // parallel
     } // stage test
+    stage('ship') {
+      parallel {
+        stage('ship 6.1.0') {
+           environment {
+            VERSION = 6.1.0
+            TARBALL = "${env.NAME} + 
+                      '-' + ${env.VERSION} +
+                      '-' + ${env.SITE} + 
+                      '-' + ${ARCH} +
+                      '-' + ${env.OS}.tar.gz" // ${env.BUILD_NUMBER}.tar.gz"
+            ZENODO_API_KEY = credentials('zenodo_access_token')
+           }
+           agent { label "centos7"}
+           steps {
+             sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
+             sh "python publish.py"
+           }
+        }
+      }
+    }
   } // stages
   // post {
   //   always {
