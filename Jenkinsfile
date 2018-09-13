@@ -242,7 +242,7 @@ pipeline {
       parallel {
         stage('ship 6.1.0') {
            environment {
-            VERSION = 6.1.0
+            VERSION = '6.1.0'
             TARBALL = "${env.NAME} + 
                       '-' + ${env.VERSION} +
                       '-' + ${env.SITE} + 
