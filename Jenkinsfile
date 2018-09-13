@@ -243,10 +243,10 @@ pipeline {
         stage('ship 6.1.0') {
            environment {
             VERSION = '6.1.0'
-            TARBALL = "${env.NAME} + 
-                      '-' + ${env.VERSION} +
-                      '-' + ${env.SITE} + 
-                      '-' + ${ARCH} +
+            TARBALL = "${env.NAME} + \
+                      '-' + ${env.VERSION} + \
+                      '-' + ${env.SITE} + \
+                      '-' + ${ARCH} + \
                       '-' + ${env.OS}.tar.gz" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
