@@ -148,6 +148,7 @@ pipeline {
           environment {
             OS = 'centos6'
             VERSION = '6.1.0'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "centos6" }
           steps {
@@ -159,6 +160,7 @@ pipeline {
           environment {
             OS = 'centos7'
             VERSION = '6.1.2'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "centos7" }
           steps {
@@ -170,6 +172,7 @@ pipeline {
           environment {
             OS = 'centos7'
             VERSION = '6.1.0'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "centos7" }
           steps {
@@ -181,6 +184,7 @@ pipeline {
           environment {
             OS = 'u1404'
             VERSION = '6.1.2'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "u1404" }
           steps {
@@ -192,6 +196,7 @@ pipeline {
           environment {
             OS = 'u1404'
             VERSION = '6.1.0'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "u1404" }
           steps {
@@ -203,6 +208,7 @@ pipeline {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "u1610" }
           steps {
@@ -214,6 +220,7 @@ pipeline {
           environment {
             OS = 'u1610'
             VERSION = '6.1.0'
+            WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           agent { label "u1610" }
           steps {
