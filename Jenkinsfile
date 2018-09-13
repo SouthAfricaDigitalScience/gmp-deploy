@@ -24,7 +24,7 @@ pipeline {
         stage ('6.1.0') {
           environment {
             VERSION='6.1.0'
-            SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
+            SRC_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
             SRC_DIR = "${'/data/src/' + env.NAME }"
           }
           agent { label 'centos7' }
