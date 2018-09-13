@@ -380,5 +380,4 @@ pipeline {
   //     color: 'bad',
   //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
   //   }
-  }
 }
