@@ -10,6 +10,7 @@ pipeline {
     stage('cache tarball') {
       parallel {
         stage ('6.1.2') {
+          options { retry(3) }
           environment {
             VERSION   = '6.1.2'
             SRC_FILE  = "${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
@@ -18,7 +19,21 @@ pipeline {
           agent { label 'centos7' }
           steps {
             sh 'mkdir -vp ${SRC_DIR}'
-            sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
+            script {
+              if(!fileExist("${SRC_DIR}/${SRC_FILE}")  && !fileExist("${SRC_DIR}/${SRC_FILE}.lock")) {
+                echo "${SRC_DIR}/${SRC_FILE} not present"
+                touch "${SRC_DIR}/${SRC_FILE}.lock"
+                sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
+                sh 'rm ${SRC_DIR}/${SRC_FILE}.lock' 
+              }     
+              else if(fileExist("${SRC_DIR}/${SRC_FILE}.lock"))
+                while (!fileExist("${SRC_DIR}/${SRC_FILE}.lock")) {
+                  sh 'file busy downloading there'
+                }
+              else {
+                echo "file is already there"
+              }
+            }
           }
         }
         stage ('6.1.0') {
@@ -36,15 +51,16 @@ pipeline {
       }
     }
     stage('build') {
-      options { 
-        skipDefaultCheckout() 
-        }
       parallel {
         stage('build 6.1.2 on centos6') {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label 'centos6' }
           steps {
@@ -60,6 +76,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "centos6" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -71,6 +91,10 @@ pipeline {
             OS = 'centos7'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "centos7" }
           steps {
@@ -84,6 +108,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "centos7" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -95,6 +123,10 @@ pipeline {
             OS = 'u1404'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "u1404" }
           steps {
@@ -108,6 +140,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "u1404" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -119,6 +155,10 @@ pipeline {
             OS = 'u1610'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "u1610" }
           steps {
@@ -132,6 +172,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "u1610" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -141,15 +185,16 @@ pipeline {
       } // parallel
     } // stage build
     stage('test') {
-      options { 
-        skipDefaultCheckout() 
-        }
       parallel {
         stage('test 6.1.2 on centos6') {
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "centos6" }
           steps {
@@ -163,6 +208,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "centos6" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -174,6 +223,10 @@ pipeline {
             OS = 'centos7'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "centos7" }
           steps {
@@ -187,6 +240,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "centos7" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -198,6 +255,10 @@ pipeline {
             OS = 'u1404'
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "u1404" }
           steps {
@@ -211,6 +272,10 @@ pipeline {
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "u1404" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -223,6 +288,10 @@ pipeline {
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
           agent { label "u1610" }
           steps {
             sh 'echo $SITE $NAME $OS $ARCH $VERSION'
@@ -234,6 +303,10 @@ pipeline {
             OS = 'u1610'
             VERSION = '6.1.0'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
+          }
+          options { 
+            retry(3) 
+            skipDefaultCheckout() 
           }
           agent { label "u1610" }
           steps {
@@ -255,6 +328,10 @@ pipeline {
                       '-' + ${env.OS}.tar.gz" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
+           options { 
+            retry(3) 
+            skipDefaultCheckout() 
+          }
            agent { label "centos7"}
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
