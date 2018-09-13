@@ -20,14 +20,14 @@ pipeline {
           steps {
             sh 'mkdir -vp ${SRC_DIR}'
             script {
-              if(!fileExist("${SRC_DIR}/${SRC_FILE}")  && !fileExist("${SRC_DIR}/${SRC_FILE}.lock")) {
+              if(!fileExists("${SRC_DIR}/${SRC_FILE}")  && !fileExists("${SRC_DIR}/${SRC_FILE}.lock")) {
                 echo "${SRC_DIR}/${SRC_FILE} not present"
                 touch "${SRC_DIR}/${SRC_FILE}.lock"
                 sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
                 sh 'rm ${SRC_DIR}/${SRC_FILE}.lock' 
               }     
-              else if(fileExist("${SRC_DIR}/${SRC_FILE}.lock"))
-                while (!fileExist("${SRC_DIR}/${SRC_FILE}.lock")) {
+              else if(fileExists("${SRC_DIR}/${SRC_FILE}.lock"))
+                while (!fileExists("${SRC_DIR}/${SRC_FILE}.lock")) {
                   sh 'file busy downloading there'
                 }
               else {
