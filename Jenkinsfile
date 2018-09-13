@@ -30,7 +30,7 @@ pipeline {
           agent { label 'centos7' }
           steps {
             sh 'mkdir -vp $SRC_DIR'
-            sh 'wget ${SRC_URL}/${SRC_FILE}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
+            sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
           }
         }
       }
