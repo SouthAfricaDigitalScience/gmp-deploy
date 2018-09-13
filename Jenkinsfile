@@ -36,6 +36,9 @@ pipeline {
       }
     }
     stage('build') {
+      options { 
+        skipDefaultCheckout() 
+        }
       parallel {
         stage('build 6.1.2 on centos6') {
           environment {
@@ -138,9 +141,11 @@ pipeline {
       } // parallel
     } // stage build
     stage('test') {
+      options { 
+        skipDefaultCheckout() 
+        }
       parallel {
         stage('test 6.1.2 on centos6') {
-          options { skipDefaultCheckout() }
           environment {
             OS = 'centos6'
             VERSION = '6.1.2'
