@@ -1,23 +1,24 @@
 pipeline {
   agent none
   environment {
-    ARCH = 'x86_64'
-    SITE = 'generic'
-    NAME = 'gmp'
+    ARCH    = 'x86_64'
+    SITE    = 'generic'
+    NAME    = 'gmp'
+    SRC_URL = 'https://gmplib.org/download/gmp/'
   }
   stages {
     stage('cache tarball') {
       parallel {
         stage ('6.1.2') {
           environment {
-            VERSION='6.1.2'
-            SOURCE_FILE="${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
-            SRC_DIR = "${'/data/src/' + env.NAME }"
+            VERSION   = '6.1.2'
+            SRC_FILE  = "${env.NAME + '-' + env.VERSION + '.tar.bz2'}"
+            SRC_DIR   = "${'/data/src/' + env.NAME }"
           }
           agent { label 'centos7' }
           steps {
-            sh 'mkdir -vp $SRC_DIR'
-            sh 'wget $SOURCE_FILE -O $SRC_DIR/$SOURCE_FILE'
+            sh 'mkdir -vp ${SRC_DIR}'
+            sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
           }
         }
         stage ('6.1.0') {
@@ -29,7 +30,7 @@ pipeline {
           agent { label 'centos7' }
           steps {
             sh 'mkdir -vp $SRC_DIR'
-            sh 'wget $SOURCE_FILE -O $SRC_DIR/$SOURCE_DIR'
+            sh 'wget ${SRC_URL}/${SRC_FILE}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
           }
         }
       }
