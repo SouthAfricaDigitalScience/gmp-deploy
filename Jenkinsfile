@@ -338,7 +338,19 @@ pipeline {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
              sh "python publish-ci.py"
            }
-        }
+        } // ship 6.1.0 stage
+        post {
+            success {
+              slackSend channel: '#gmp-code-rade',
+              color: 'good',
+              message: "The pipeline ${currentBuild.fullDisplayName} shipped successfully."
+            }
+            failure {
+              slackSend channel: '#gmp-code-rade',
+              color: 'bad',
+              message: "The pipeline ${currentBuild.fullDisplayName} did not ship."
+            }
+          }
         stage('ship 6.1.2') {
            environment {
             VERSION = '6.1.2'
@@ -362,25 +374,8 @@ pipeline {
              sh "pwd"
              sh "python publish-ci.py"
            }
-        }
-      }
-    }
+        } // ship 6.1.2 stage
+      } // parallel
+    } // ship stage
   } // stages
-  // post {
-  //   always {
-  //     agent { label 'centos7' }
-  //     echo 'One way or another, I have finished'
-  //     archiveArtifacts artifacts: '$WORKSPACE/build-$BUILD_NUMBER/*', fingerprint: true
-  //     deleteDir()
-  //   }
-  //   success {
-  //     slackSend channel: '#gmp-code-rade',
-  //     color: 'good',
-  //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-  //   }
-  //   failure {
-  //     slackSend channel: '#gmp-code-rade',
-  //     color: 'bad',
-  //     message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-  //   }
-}
+} // pipeline
