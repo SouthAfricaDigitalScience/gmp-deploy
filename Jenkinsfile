@@ -339,18 +339,6 @@ pipeline {
              sh "python publish-ci.py"
            }
         } // ship 6.1.0 stage
-        post {
-            success {
-              slackSend channel: '#gmp-code-rade',
-              color: 'good',
-              message: "The pipeline ${currentBuild.fullDisplayName} shipped successfully."
-            }
-            failure {
-              slackSend channel: '#gmp-code-rade',
-              color: 'bad',
-              message: "The pipeline ${currentBuild.fullDisplayName} did not ship."
-            }
-          }
         stage('ship 6.1.2') {
            environment {
             VERSION = '6.1.2'
@@ -377,5 +365,17 @@ pipeline {
         } // ship 6.1.2 stage
       } // parallel
     } // ship stage
+    post {
+            success {
+              slackSend channel: '#gmp-code-rade',
+              color: 'good',
+              message: "The pipeline ${currentBuild.fullDisplayName} shipped successfully."
+            }
+            failure {
+              slackSend channel: '#gmp-code-rade',
+              color: 'bad',
+              message: "The pipeline ${currentBuild.fullDisplayName} did not ship."
+            }
+          }
   } // stages
 } // pipeline
