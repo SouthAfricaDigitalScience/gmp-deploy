@@ -14,7 +14,7 @@ headers = {"Content-Type": "application/json"}
 response = requests.get(uri,  params={'access_token': access_token })
 # get env
 # data will be sent as a parameter to the request
-data = { 'filename': '/data/artefacts/gmp-6.1.0-generic-x86_64-centos6.tar.gz' }
+data = { 'filename': os.environ['TARBALL'] }
 # TODO - load from file
 metadata = {
           'metadata': {
