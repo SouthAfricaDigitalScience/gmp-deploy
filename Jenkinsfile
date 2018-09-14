@@ -65,7 +65,7 @@ pipeline {
           agent { label 'centos6' }
           steps {
             sh 'pwd'
-            sh 'echo $SITE $NAME $OS $ARCH $VERSION $WORKSPACE'
+            sh 'echo $SITE $NME $OS $ARCH $VERSION $WORKSPACE'
             sh './build.sh'
             sh ''
           }
@@ -109,7 +109,7 @@ pipeline {
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
           options { 
-            retry(3) 
+            retry(3)
             skipDefaultCheckout() 
           }
           agent { label "centos7" }
@@ -349,6 +349,7 @@ pipeline {
                       '-' + env.ARCH + \
                       '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
+            WORKSPACE = '/home/jenkins/workspace/'
            }
            options { 
             retry(3) 
@@ -357,6 +358,8 @@ pipeline {
            agent { label "centos7"}
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
+             sh "ls "
+             sh "pwd"
              sh "python publish.py"
            }
         }
