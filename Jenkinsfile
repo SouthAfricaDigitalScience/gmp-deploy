@@ -323,10 +323,10 @@ pipeline {
             VERSION = '6.1.0'
             OS = "centos6"
             TARBALL = "${env.NAME + \
-                      '-' + $env.VERSION + \
-                      '-' + $env.SITE + \
-                      '-' + $env.ARCH + \
-                      '-' + $env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
+                      '-' + env.VERSION + \
+                      '-' + env.SITE + \
+                      '-' + env.ARCH + \
+                      '-' + env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
            options { 
@@ -344,10 +344,10 @@ pipeline {
             VERSION = '6.1.2'
             OS = "centos6"
             TARBALL = "${env.NAME + \
-                      '-' + $env.VERSION + \
-                      '-' + $env.SITE + \
-                      '-' + $env.ARCH + \
-                      '-' + $env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
+                      '-' + env.VERSION + \
+                      '-' + env.SITE + \
+                      '-' + env.ARCH + \
+                      '-' + env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
            options { 
