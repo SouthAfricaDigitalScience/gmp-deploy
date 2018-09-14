@@ -35,7 +35,7 @@ metadata = {
           'communities': [{'identifier': 'code-rade'}]
         }
       }
-
+print os.environ['BUILD_NUMBER']
 # check if json is present
 if os.path.isfile('zenodo.json'):
   print("file is there")

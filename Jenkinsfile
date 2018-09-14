@@ -316,7 +316,7 @@ pipeline {
         } // stage
       } // parallel
     } // stage test
-    stage('ship') {
+    stage('ship CI') {
       parallel {
         stage('ship 6.1.0') {
            environment {
@@ -373,7 +373,7 @@ pipeline {
       } // parallel
     } // ship stage
   } // stage
-  stage('deploy') {
+  stage('build deploy') {
       parallel {
         stage('deploy 6.1.2 on centos6') {
           environment {
