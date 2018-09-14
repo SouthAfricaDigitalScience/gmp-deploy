@@ -347,13 +347,14 @@ pipeline {
            environment {
             VERSION = '6.1.2'
             OS = "centos6"
-            TARBALL = "${env.NAME + \
+            TARBALL = "${'/data/artefacts/' + env.NAME + \
                       '-' + env.VERSION + \
                       '-' + env.SITE + \
                       '-' + env.ARCH + \
                       '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
             WORKSPACE = '/home/jenkins/workspace/'
+            PATH = "$PATH:$HOME/.local/bin"
            }
            options { 
             retry(3) 
@@ -362,9 +363,11 @@ pipeline {
            agent { label 'dockyard'}
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "curl  "
-             sh "pwd"
+             sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
+             sh "python get-pip.py --user"
+             sh "pip install --user requests"
              sh "python publish-ci.py"
+             archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
            }
         } // ship 6.1.2 stage
       } // parallel

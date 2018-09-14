@@ -3,9 +3,9 @@ import json
 import os
 # import tarfile
 
-def make_tarfile(output_filename, source_dir):
-    with tarfile.open(output_filename, "w:gz") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+# def make_tarfile(output_filename, source_dir):
+#     with tarfile.open(output_filename, "w:gz") as tar:
+#         tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 uri = 'https://zenodo.org/api/deposit/depositions'
 access_token = os.environ['ZENODO_API_KEY']
@@ -14,7 +14,7 @@ headers = {"Content-Type": "application/json"}
 response = requests.get(uri,  params={'access_token': access_token })
 # get env
 # data will be sent as a parameter to the request
-data = { 'filename': 'gmp-6.1.2-generic-x86_64.tar.gz' }
+data = { 'filename': os.environ['TARBALL'] }
 # TODO - load from file
 metadata = {
           'metadata': {
@@ -32,7 +32,7 @@ metadata = {
           'access_right': 'open',
           'license': 'Apache-2.0',
           'prereserve_doi': 'true',
-          'communities': 'code-rade'
+          'communities': [{'identifier': 'code-rade'}]
         }
       }
 
@@ -51,19 +51,14 @@ else:
   # create deposition
   create = requests.post(uri, params={'access_token': access_token}, json={}, headers=headers)
   create.json()
+  print create.json()
+  id = create.json()['id']
   with open('zenodo.json', 'w') as deposition:
     json.dump(create.json(), deposition)
-  id = create.json['id']
+  
 
-# tarball = ${env.NAME + \
-#                       '-' + $env.VERSION + \
-#                       '-' + $env.SITE + \
-#                       '-' + $env.ARCH + \
-#                       '-' + $env.OS.
-# os.environ['ZENODO_API_KEY']
-# make_tarfile()
 # files is an array of files to be sent as parameters to the request
-files = {'file': open('gmp-6.1.2-generic-sl6-x86_64.tar.gz', 'rb')}
+files = {'file': open(os.environ['TARBALL'], 'rb')}
 deposit = requests.post(uri + '/%s/files' % id,
                         params={'access_token': access_token},
                         data=data,
