@@ -328,14 +328,18 @@ pipeline {
                       '-' + env.ARCH + \
                       '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
+            PATH = "$PATH:$HOME/.local/bin"
            }
            options { 
             retry(3) 
             skipDefaultCheckout() 
           }
-           agent { label "centos7" }
+           agent { label 'dockyard' }
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
+             sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
+             sh "python get-pip.py --user"
+             sh "pip install --user requests"
              sh "python publish-ci.py"
            }
         } // ship 6.1.0 stage
@@ -355,10 +359,10 @@ pipeline {
             retry(3) 
             skipDefaultCheckout() 
           }
-           agent { label "centos7"}
+           agent { label 'dockyard'}
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "ls "
+             sh "curl  "
              sh "pwd"
              sh "python publish-ci.py"
            }
