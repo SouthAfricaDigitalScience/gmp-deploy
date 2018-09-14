@@ -326,7 +326,7 @@ pipeline {
                       '-' + env.VERSION + \
                       '-' + env.SITE + \
                       '-' + env.ARCH + \
-                      '-' + env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
+                      '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
            options { 
@@ -347,7 +347,7 @@ pipeline {
                       '-' + env.VERSION + \
                       '-' + env.SITE + \
                       '-' + env.ARCH + \
-                      '-' + env.OS.tar.gz}" // ${env.BUILD_NUMBER}.tar.gz"
+                      '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
            }
            options { 
