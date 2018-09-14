@@ -336,7 +336,7 @@ pipeline {
            agent { label "centos7" }
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "python publish.py"
+             sh "python publish-ci.py"
            }
         }
         stage('ship 6.1.2') {
@@ -360,7 +360,7 @@ pipeline {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
              sh "ls "
              sh "pwd"
-             sh "python publish.py"
+             sh "python publish-ci.py"
            }
         }
       }
