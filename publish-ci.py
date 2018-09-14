@@ -3,9 +3,9 @@ import json
 import os
 # import tarfile
 
-def make_tarfile(output_filename, source_dir):
-    with tarfile.open(output_filename, "w:gz") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+# def make_tarfile(output_filename, source_dir):
+#     with tarfile.open(output_filename, "w:gz") as tar:
+#         tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 uri = 'https://zenodo.org/api/deposit/depositions'
 access_token = os.environ['ZENODO_API_KEY']
@@ -14,7 +14,7 @@ headers = {"Content-Type": "application/json"}
 response = requests.get(uri,  params={'access_token': access_token })
 # get env
 # data will be sent as a parameter to the request
-data = { 'filename': 'gmp-6.1.2-generic-x86_64.tar.gz' }
+data = { 'filename': '/data/artefacts/gmp-6.1.0-generic-x86_64-centos6.tar.gz' }
 # TODO - load from file
 metadata = {
           'metadata': {
@@ -55,15 +55,8 @@ else:
     json.dump(create.json(), deposition)
   id = create.json['id']
 
-# tarball = ${env.NAME + \
-#                       '-' + $env.VERSION + \
-#                       '-' + $env.SITE + \
-#                       '-' + $env.ARCH + \
-#                       '-' + $env.OS.
-# os.environ['ZENODO_API_KEY']
-# make_tarfile()
 # files is an array of files to be sent as parameters to the request
-files = {'file': open('gmp-6.1.2-generic-sl6-x86_64.tar.gz', 'rb')}
+files = {'file': open(os.environ['TARBALL'], 'rb')}
 deposit = requests.post(uri + '/%s/files' % id,
                         params={'access_token': access_token},
                         data=data,
