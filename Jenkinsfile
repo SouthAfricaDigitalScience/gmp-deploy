@@ -354,6 +354,7 @@ pipeline {
                       '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
             ZENODO_API_KEY = credentials('zenodo_access_token')
             WORKSPACE = '/home/jenkins/workspace/'
+            PATH = "$PATH:$HOME/.local/bin"
            }
            options { 
             retry(3) 
@@ -366,7 +367,7 @@ pipeline {
              sh "python get-pip.py --user"
              sh "pip install --user requests"
              sh "python publish-ci.py"
-            archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
+             archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
            }
         } // ship 6.1.2 stage
       } // parallel

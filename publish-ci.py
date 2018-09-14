@@ -32,7 +32,7 @@ metadata = {
           'access_right': 'open',
           'license': 'Apache-2.0',
           'prereserve_doi': 'true',
-          'communities': 'code-rade'
+          'communities': [{'identifier': 'code-rade'}]
         }
       }
 
@@ -51,9 +51,11 @@ else:
   # create deposition
   create = requests.post(uri, params={'access_token': access_token}, json={}, headers=headers)
   create.json()
+  print create.json()
+  id = create.json()['id']
   with open('zenodo.json', 'w') as deposition:
     json.dump(create.json(), deposition)
-  id = create.json['id']
+  
 
 # files is an array of files to be sent as parameters to the request
 files = {'file': open(os.environ['TARBALL'], 'rb')}
