@@ -347,7 +347,7 @@ pipeline {
            environment {
             VERSION = '6.1.2'
             OS = "centos6"
-            TARBALL = "${env.NAME + \
+            TARBALL = "${'/data/artefacts/' + env.NAME + \
                       '-' + env.VERSION + \
                       '-' + env.SITE + \
                       '-' + env.ARCH + \
@@ -362,8 +362,9 @@ pipeline {
            agent { label 'dockyard'}
            steps {
              sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "curl  "
-             sh "pwd"
+             sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
+             sh "python get-pip.py --user"
+             sh "pip install --user requests"
              sh "python publish-ci.py"
            }
         } // ship 6.1.2 stage
