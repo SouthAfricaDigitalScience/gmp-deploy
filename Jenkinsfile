@@ -372,152 +372,152 @@ pipeline {
         } // ship 6.1.2 stage
       } // parallel
     } // ship stage
-  } // stage
-  stage('build deploy') {
-      parallel {
-        stage('deploy 6.1.2 on centos6') {
-          environment {
-            OS = 'centos6'
-            VERSION = '6.1.2'
-            WORKSPACE = "${'/home/jenkins/workspace/' +\
-                           env.NAME + '/' \
-                           + env.VERSION + '/' \
-                           + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label 'centos6' }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.0 on centos6') {
-          environment {
-            OS = 'centos6'
-            VERSION = '6.1.0'
-            WORKSPACE = "${'/home/jenkins/workspace/' + \
-                            env.NAME + '/' + env.VERSION + \
-                            '/' + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label "centos6" }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.2 on centos7') {
-          environment {
-            OS = 'centos7'
-            VERSION = '6.1.2'
-            WORKSPACE = "${'/home/jenkins/workspace/' + \
-                            env.NAME + \
-                            '/' + env.VERSION + \
-                            '/' + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label "centos7" }
-          steps {
-            sh './deloy.sh'
-          }
-        }
-        stage('deploy 6.1.0 on centos7') {
-          environment {
-            OS = 'centos7'
-            VERSION = '6.1.0'
-            WORKSPACE = "${'/home/jenkins/workspace/' \
-                            + env.NAME \
-                            + '/' + env.VERSION \
-                            + '/' + env.OS}"
-          }
-          options { 
-            retry(3)
-            skipDefaultCheckout() 
-          }
-          agent { label "centos7" }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.2 on ubuntu 1404') {
-          environment {
-            OS = 'u1404'
-            VERSION = '6.1.2'
-            WORKSPACE = "${'/home/jenkins/workspace/' \
-                            + env.NAME \
-                            + '/' + env.VERSION \
-                            + '/' + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label "u1404" }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.0 on ubuntu 1404') {
-          environment {
-            OS = 'u1404'
-            VERSION = '6.1.0'
-            WORKSPACE = "${'/home/jenkins/workspace/' \
-                            + env.NAME \
-                            + '/' + env.VERSION \
-                            + '/' + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label "u1404" }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.2 on ubuntu 1610') {
-          environment {
-            OS = 'u1610'
-            VERSION = '6.1.2'
-            WORKSPACE = "${'/home/jenkins/workspace/' \
-                            + env.NAME \
-                            + '/' + env.VERSION \
-                            + '/' + env.OS}"
-          }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-          agent { label "u1610" }
-          steps {
-            sh './deploy.sh'
-          }
-        }
-        stage('deploy 6.1.0 on ubuntu 1610') {
-          environment {
-            OS = 'u1610'
-            VERSION = '6.1.0'
-            WORKSPACE = "${'/home/jenkins/workspace/' \
-                            + env.NAME + '/' \
+    stage('build deploy') {
+        parallel {
+          stage('deploy 6.1.2 on centos6') {
+            environment {
+              OS = 'centos6'
+              VERSION = '6.1.2'
+              WORKSPACE = "${'/home/jenkins/workspace/' +\
+                            env.NAME + '/' \
                             + env.VERSION + '/' \
                             + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label 'centos6' }
+            steps {
+              sh './deploy.sh'
+            }
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          stage('deploy 6.1.0 on centos6') {
+            environment {
+              OS = 'centos6'
+              VERSION = '6.1.0'
+              WORKSPACE = "${'/home/jenkins/workspace/' + \
+                              env.NAME + '/' + env.VERSION + \
+                              '/' + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "centos6" }
+            steps {
+              sh './deploy.sh'
+            }
           }
-          agent { label "u1610" }
-          steps {
-            sh './deploy.sh'
-          } // steps
-        } // stage
-      } // parallel
-    } // stage build
+          stage('deploy 6.1.2 on centos7') {
+            environment {
+              OS = 'centos7'
+              VERSION = '6.1.2'
+              WORKSPACE = "${'/home/jenkins/workspace/' + \
+                              env.NAME + \
+                              '/' + env.VERSION + \
+                              '/' + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "centos7" }
+            steps {
+              sh './deloy.sh'
+            }
+          }
+          stage('deploy 6.1.0 on centos7') {
+            environment {
+              OS = 'centos7'
+              VERSION = '6.1.0'
+              WORKSPACE = "${'/home/jenkins/workspace/' \
+                              + env.NAME \
+                              + '/' + env.VERSION \
+                              + '/' + env.OS}"
+            }
+            options { 
+              retry(3)
+              skipDefaultCheckout() 
+            }
+            agent { label "centos7" }
+            steps {
+              sh './deploy.sh'
+            }
+          }
+          stage('deploy 6.1.2 on ubuntu 1404') {
+            environment {
+              OS = 'u1404'
+              VERSION = '6.1.2'
+              WORKSPACE = "${'/home/jenkins/workspace/' \
+                              + env.NAME \
+                              + '/' + env.VERSION \
+                              + '/' + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "u1404" }
+            steps {
+              sh './deploy.sh'
+            }
+          }
+          stage('deploy 6.1.0 on ubuntu 1404') {
+            environment {
+              OS = 'u1404'
+              VERSION = '6.1.0'
+              WORKSPACE = "${'/home/jenkins/workspace/' \
+                              + env.NAME \
+                              + '/' + env.VERSION \
+                              + '/' + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "u1404" }
+            steps {
+              sh './deploy.sh'
+            }
+          }
+          stage('deploy 6.1.2 on ubuntu 1610') {
+            environment {
+              OS = 'u1610'
+              VERSION = '6.1.2'
+              WORKSPACE = "${'/home/jenkins/workspace/' \
+                              + env.NAME \
+                              + '/' + env.VERSION \
+                              + '/' + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "u1610" }
+            steps {
+              sh './deploy.sh'
+            }
+          }
+          stage('deploy 6.1.0 on ubuntu 1610') {
+            environment {
+              OS = 'u1610'
+              VERSION = '6.1.0'
+              WORKSPACE = "${'/home/jenkins/workspace/' \
+                              + env.NAME + '/' \
+                              + env.VERSION + '/' \
+                              + env.OS}"
+            }
+            options { 
+              retry(3) 
+              skipDefaultCheckout() 
+            }
+            agent { label "u1610" }
+            steps {
+              sh './deploy.sh'
+            } // steps
+          } // stage
+        } // parallel
+      } // stage deploy
+  }// stages
 } // pipeline
