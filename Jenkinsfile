@@ -366,6 +366,7 @@ pipeline {
              sh "python get-pip.py --user"
              sh "pip install --user requests"
              sh "python publish-ci.py"
+            archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
            }
         } // ship 6.1.2 stage
       } // parallel
