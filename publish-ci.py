@@ -45,6 +45,8 @@ if os.path.isfile('zenodo.json'):
   id = zenodo['id']
   print 'id is ',id
   # Check that this is the right ID
+  # compare md5sums
+  # replace it with a new version
 else:
   # deposit the file
   print("no deposition yet")
