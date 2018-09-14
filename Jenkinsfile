@@ -424,7 +424,7 @@ pipeline {
             }
             agent { label "centos7" }
             steps {
-              sh './deloy.sh'
+              sh './deploy.sh'
             }
           }
           stage('deploy 6.1.0 on centos7') {
