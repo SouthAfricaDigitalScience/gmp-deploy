@@ -352,7 +352,7 @@ pipeline {
         TARBALL = "${env.NAME + \
                   '-' + env.SITE + \
                   '-' + env.ARCH + \
-                  '-' + env.BUILD_NUMBER \
+                  '-' + env.BUILD_NUMBER + \
                   '-' + '.tar.gz'}"
         ZENODO_API_KEY = credentials('zenodo_access_token')
         PATH = "$PATH:$HOME/.local/bin"
