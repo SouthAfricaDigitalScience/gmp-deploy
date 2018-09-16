@@ -1,0 +1,19 @@
+{ 
+  "metadata": {
+    "upload_type": "software",
+    "publication_type": "softwaredocumentation",
+    "title": "GMP Artefacts for CODE-RADE CI phase build ",
+    "creators": [{
+      "name": "Bruce Becker",
+      "affiliation": "EGI Foundation",
+      "orcid": "0000-0002-6607-7145"
+    }],
+    "description": "See the README",
+    "access_right": "open",
+    "license": "Apache-2.0",
+    "prereserve_doi": "true",
+    "communities": [{
+      "identifier": "code-rade"
+    }]
+  }
+}

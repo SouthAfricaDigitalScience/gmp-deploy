@@ -348,60 +348,30 @@ pipeline {
       } // parallel
     } // stage test
     stage('ship CI') {
-      parallel {
-        stage('ship 6.1.0') {
-           environment {
-            VERSION = '6.1.0'
-            OS = "centos6"
-            TARBALL = "${env.NAME + \
-                      '-' + env.VERSION + \
-                      '-' + env.SITE + \
-                      '-' + env.ARCH + \
-                      '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
-            ZENODO_API_KEY = credentials('zenodo_access_token')
-            PATH = "$PATH:$HOME/.local/bin"
-           }
-           options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-           agent { label 'dockyard' }
-           steps {
-             sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
-             sh "python get-pip.py --user"
-             sh "pip install --user requests"
-             sh "python publish-ci.py"
-           }
-        } // ship 6.1.0 stage
-        stage('ship 6.1.2') {
-           environment {
-            VERSION = '6.1.2'
-            OS = "centos6"
-            TARBALL = "${'/data/artefacts/' + env.NAME + \
-                      '-' + env.VERSION + \
-                      '-' + env.SITE + \
-                      '-' + env.ARCH + \
-                      '-' + env.OS + '.tar.gz'}" // ${env.BUILD_NUMBER}.tar.gz"
-            ZENODO_API_KEY = credentials('zenodo_access_token')
-            WORKSPACE = '/home/jenkins/workspace/'
-            PATH = "$PATH:$HOME/.local/bin"
-           }
-           options { 
-            retry(3) 
-            skipDefaultCheckout() 
-          }
-           agent { label 'dockyard'}
-           steps {
-             sh "tar cvfz ${TARBALL} /data/ci-build/generic/${OS}/${ARCH}/${NAME}/${VERSION}"
-             sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
-             sh "python get-pip.py --user"
-             sh "pip install --user requests"
-             sh "python publish-ci.py"
-             archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
-           }
-        } // ship 6.1.2 stage
-      } // parallel
+      environment {
+        TARBALL = "${env.NAME + \
+                  '-' + env.SITE + \
+                  '-' + env.ARCH + \
+                  '-' + env.BUILD_NUMBER \
+                  '-' + '.tar.gz'}"
+        ZENODO_API_KEY = credentials('zenodo_access_token')
+        PATH = "$PATH:$HOME/.local/bin"
+      }
+      options { 
+        retry(3) 
+        skipDefaultCheckout() 
+      }
+      agent { label 'dockyard' }
+      steps {
+        sh "tar cvfz ${TARBALL} \
+          /data/ci-build/generic/*/${ARCH}/${NAME} \
+          /data/modules/libraries/gmp"
+        sh "curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py"
+        sh "python get-pip.py --user"
+        sh "pip install --user requests"
+        sh "python publish-ci.py"
+        archiveArtifacts artifacts: 'zenodo.json', fingerprint: true
+      } // steps
     } // ship stage
     stage('build deploy') {
         parallel {

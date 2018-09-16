@@ -1,40 +1,16 @@
 import requests
 import json
 import os
-# import tarfile
-
-# def make_tarfile(output_filename, source_dir):
-#     with tarfile.open(output_filename, "w:gz") as tar:
-#         tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 uri = 'https://zenodo.org/api/deposit/depositions'
 access_token = os.environ['ZENODO_API_KEY']
 headers = {"Content-Type": "application/json"}
 # login
 response = requests.get(uri,  params={'access_token': access_token })
-# get env
 # data will be sent as a parameter to the request
 data = { 'filename': os.environ['TARBALL'] }
-# TODO - load from file
-metadata = {
-          'metadata': {
-          'upload_type': 'software',
-          'publication_type': 'softwaredocumentation',
-          'title': 'GMP build for CODE-RADE CI phase',
-          'creators': [
-            {
-              'name': 'Bruce Becker',
-              'affiliation': 'EGI Foundation',
-              'orcid': '0000-0002-6607-7145'
-            }
-          ],
-          'description': 'See the README',
-          'access_right': 'open',
-          'license': 'Apache-2.0',
-          'prereserve_doi': 'true',
-          'communities': [{'identifier': 'code-rade'}]
-        }
-      }
+with open('metadata.json') as metadata_file:
+    metadata = json.load(metadata_file)
 print os.environ['BUILD_NUMBER']
 # check if json is present
 if os.path.isfile('zenodo.json'):
@@ -46,6 +22,7 @@ if os.path.isfile('zenodo.json'):
   print 'id is ',id
   # Check that this is the right ID
   # compare md5sums
+  print 
   # replace it with a new version
 else:
   # deposit the file
