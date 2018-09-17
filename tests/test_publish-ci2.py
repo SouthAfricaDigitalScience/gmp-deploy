@@ -19,7 +19,9 @@ def test_setup_fake_env():
     assert p.setup()
 
 
-@mock.patch.dict(os.environ, {})
+@mock.patch.dict(os.environ, {'SHELL': '/bin/bash',
+                              'PWD': '/home/becker/SAGrid-2.0/gmp-deploy'})
 def test_setup_no_env():
-    with pytest.raises(SystemExit) as no_vars:
-        assert p.setup()
+    with pytest.raises(KeyError) as no_vars:
+        print os.environ['TARBALL']
+        p.setup()

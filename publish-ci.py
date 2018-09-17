@@ -29,7 +29,7 @@ if os.path.isfile('zenodo.json'):
     # get the files path
     files_url = zenodo['links']['files']
     print files_url
-    published_checksum =  requests.get(
+    published_checksum = requests.get(
                             files_url,
                             params={'access_token': access_token}).json()[0]['checksum']
     checksum = hashlib.md5(open(os.environ['TARBALL'], 'rb').read()).hexdigest()
