@@ -1,5 +1,6 @@
 import requests
 import json
+import hashlib
 import os
 
 uri = 'https://zenodo.org/api/deposit/depositions'
@@ -26,10 +27,17 @@ if os.path.isfile('zenodo.json'):
     id = zenodo['id']
     print 'id is ', id
     # get the files path
-    # files_url = zenodo.files
-    # published_md5 = requests.get(uri+ etc)
-    # compare md5sums
-    # patch or publish new version
+    files_url = zenodo['links']['files']
+    print files_url
+    published_checksum = requests.get(
+                            files_url,
+                            params={'access_token': access_token}).json()[0]['checksum']
+    checksum = hashlib.md5(open(os.environ['TARBALL'], 'rb').read()).hexdigest()
+    # assert checksum == published_checksum
+    if (checksum == published_checksum):
+        print "no need to publish this, the file is the same"
+    else:
+        print "we need to update the file"
 else:
     # The project has not yet been published
     # deposit the file

@@ -2,3 +2,7 @@ gmp-*/
 *.bz2
 *.pyc
 .vscode/
+.coverage
+coverage.xml
+.pytest_cache/
+pytestdebug.log
