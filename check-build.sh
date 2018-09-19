@@ -16,13 +16,13 @@
 . /etc/profile.d/modules.sh
 module add ci
 whoami
-cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+cd "${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}"
 make check
 
 echo $?
 
 make install
-mkdir -p ${REPO_DIR}
+mkdir -p "${REPO_DIR}"
 mkdir -p modules
 (
 cat <<MODULE_FILE
@@ -42,7 +42,7 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 prepend-path CFLAGS            "-I$::env(GMP_DIR)/include"
 prepend-path LDFLAGS           "-L$::env(GMP_DIR)/lib"
 MODULE_FILE
-) > modules/$VERSION
+) > modules/"$VERSION"
 
-mkdir -vp ${LIBRARIES}/${NAME}
-cp -v modules/$VERSION ${LIBRARIES}/${NAME}
+mkdir -vp "${LIBRARIES}/${NAME}"
+cp -v "modules/$VERSION ${LIBRARIES}/${NAME}"
