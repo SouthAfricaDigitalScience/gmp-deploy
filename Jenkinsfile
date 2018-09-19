@@ -10,9 +10,9 @@ pipeline {
     stage('QA') {
       agent { label 'testbench' }
       steps {
-        sh 'shellcheck build.sh'
-        sh 'shellcheck check-build.sh'
-        sh 'shellcheck deploy.sh'
+        sh 'shellcheck -x build.sh'
+        sh 'shellcheck -x check-build.sh'
+        sh 'shellcheck -x deploy.sh'
         sh 'pytest'
       }
     }
