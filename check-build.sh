@@ -45,4 +45,4 @@ MODULE_FILE
 ) > modules/"$VERSION"
 
 mkdir -vp "${LIBRARIES}/${NAME}"
-cp -v "modules/$VERSION ${LIBRARIES}/${NAME}"
+cp -v "modules/$VERSION" "${LIBRARIES}/${NAME}"
