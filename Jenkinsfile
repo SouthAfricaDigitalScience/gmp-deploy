@@ -13,7 +13,10 @@ pipeline {
         sh 'shellcheck -e 1091 build.sh'
         sh 'shellcheck -e 1091 check-build.sh'
         sh 'shellcheck -e 1091 deploy.sh'
-        sh 'pytest'
+        sh """
+           source /home/jenkins/python2/bin/activate
+           pytest
+           """
       }
     }
     stage('cache tarball') {
