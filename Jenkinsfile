@@ -9,12 +9,16 @@ pipeline {
   stages {
     stage('QA') {
       parallel {
-        stage('Shell Scripts') {
+        stage('Lint') {
           agent { label 'testbench' }
           steps {
             sh 'shellcheck -e 1091 build.sh'
             sh 'shellcheck -e 1091 check-build.sh'
             sh 'shellcheck -e 1091 deploy.sh'
+            sh """
+               source /home/jenkins/python2/bin/activate
+               flake8
+               """
           }
         }
         stage('Python 2 Unit Tests') {
