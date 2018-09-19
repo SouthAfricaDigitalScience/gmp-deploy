@@ -30,9 +30,11 @@ if os.path.isfile('zenodo.json'):
     files_url = zenodo['links']['files']
     print files_url
     published_checksum = requests.get(
-                            files_url,
-                            params={'access_token': access_token}).json()[0]['checksum']
-    checksum = hashlib.md5(open(os.environ['TARBALL'], 'rb').read()).hexdigest()
+                                  files_url,
+                                  params={'access_token': access_token})\
+                                 .json()[0]['checksum']
+    checksum = hashlib.md5(open(os.environ['TARBALL'], 'rb').read())\
+                      .hexdigest()
     # assert checksum == published_checksum
     if (checksum == published_checksum):
         print "no need to publish this, the file is the same"

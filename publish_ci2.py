@@ -44,6 +44,7 @@ def main():
     headers = {"Content-Type": "application/json"}
 
     zenodo_token, data = setup()
+    # files = {'file': open(os.environ['TARBALL'], 'rb')}
     print uri
     # response = login_to_zenodo(zenodo_token)
 
