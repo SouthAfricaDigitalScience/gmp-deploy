@@ -35,7 +35,7 @@ pipeline {
       //         """
       //     }
       //   }
-      // }
+      }
     }
     stage('cache tarball') {
       parallel {
