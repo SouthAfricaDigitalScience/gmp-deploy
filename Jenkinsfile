@@ -7,6 +7,15 @@ pipeline {
     SRC_URL = 'https://gmplib.org/download/gmp/'
   }
   stages {
+    stage('QA') {
+      agent { label 'testbench' }
+      steps {
+        sh 'shellcheck build.sh'
+        sh 'shellcheck check-build.sh'
+        sh 'shellcheck deploy.sh'
+        sh 'pytest'
+      }
+    }
     stage('cache tarball') {
       parallel {
         stage ('6.1.2') {
