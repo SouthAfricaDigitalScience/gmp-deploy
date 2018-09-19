@@ -26,16 +26,16 @@ pipeline {
               """
           }
         }
-        stage('Python 3 Unit Tests') {
-          agent { label 'testbench' }
-          steps {
-            sh """
-              source /home/jenkins/python3/bin/activate
-              pytest
-              """
-          }
-        }
-      }
+      //   stage('Python 3 Unit Tests') {
+      //     agent { label 'testbench' }
+      //     steps {
+      //       sh """
+      //         source /home/jenkins/python3/bin/activate
+      //         pytest
+      //         """
+      //     }
+      //   }
+      // }
     }
     stage('cache tarball') {
       parallel {
