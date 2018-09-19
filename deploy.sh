@@ -3,10 +3,10 @@
 . /etc/profile.d/modules.sh
 module add deploy
 whoami
-echo ${SOFT_DIR}
+echo "${SOFT_DIR}"
 module add deploy
-echo ${SOFT_DIR}
-cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
+echo "${SOFT_DIR}"
+cd "${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}"
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 ../configure ABI=64 \
 --with-gnu-ld \
@@ -16,10 +16,10 @@ echo "All tests have passed, will now build into ${SOFT_DIR}"
 --host=x86_64-pc-linux-gnu \
 --enable-cxx=yes \
 --enable-fat \
---prefix=${SOFT_DIR}
+--prefix="${SOFT_DIR}"
 make -j2
 echo "Creating the modules file directory ${LIBRARIES}"
-mkdir -p ${LIBRARIES}/${NAME}
+mkdir -p "${LIBRARIES}/${NAME}"
 (
 cat <<MODULE_FILE
 #%Module1.0
@@ -38,4 +38,4 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 prepend-path CFLAGS            "-I$::env(GMP_DIR)/include"
 prepend-path LDFLAGS           "-L$::env(GMP_DIR)/lib"
 MODULE_FILE
-) > ${LIBRARIES}/${NAME}/${VERSION}
+) > "${LIBRARIES}/${NAME}/${VERSION}"
