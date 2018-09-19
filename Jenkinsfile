@@ -9,30 +9,31 @@ pipeline {
   stages {
     stage('QA') {
       parallel {
-        stage('Shell Scripts')
-        agent { label 'testbench' }
-        steps {
-          sh 'shellcheck -e 1091 build.sh'
-          sh 'shellcheck -e 1091 check-build.sh'
-          sh 'shellcheck -e 1091 deploy.sh'
+        stage('Shell Scripts') {
+          agent { label 'testbench' }
+          steps {
+            sh 'shellcheck -e 1091 build.sh'
+            sh 'shellcheck -e 1091 check-build.sh'
+            sh 'shellcheck -e 1091 deploy.sh'
+          }
         }
-      }
-      stage('Python 2 Unit Tests') {
-        agent { label 'testbench' }
-        steps {
-          sh """
-             source /home/jenkins/python2/bin/activate
-             pytest
-             """
+        stage('Python 2 Unit Tests') {
+          agent { label 'testbench' }
+          steps {
+            sh """
+              source /home/jenkins/python2/bin/activate
+              pytest
+              """
+          }
         }
-      }
-      stage('Python 3 Unit Tests') {
-        agent { label 'testbench' }
-        steps {
-          sh """
-             source /home/jenkins/python3/bin/activate
-             pytest
-             """
+        stage('Python 3 Unit Tests') {
+          agent { label 'testbench' }
+          steps {
+            sh """
+              source /home/jenkins/python3/bin/activate
+              pytest
+              """
+          }
         }
       }
     }
