@@ -1,6 +1,7 @@
 import pytest
 import os
 import json
+import jmespath
 import publish_ci2 as p
 try:
     import mock
@@ -41,7 +42,22 @@ def test_setup_no_zenodo(monkeypatch):
 
 
 def test_metadata():
+    '''
+    Generic tests of the correctness of the metadata file which will be sent
+    to Zenodo after upload to describe the product.
+    '''
     assert os.path.exists('metadata.json')
     with open('metadata.json') as metadata_file:
         metadata = json.load(metadata_file)
-    assert metadata
+    access_right = jmespath.search('metadata.access_right', metadata)
+    lic = jmespath.search('metadata.license', metadata)
+    upload_type = jmespath.search('metadata.publication_type', metadata)
+    communities = jmespath.search('metadata.communities[*].identifier', metadata)
+    assert access_right == 'open'
+    assert lic == 'Apache-2.0'
+    assert upload_type == 'softwaredocumentation'
+    assert 'code-rade' in communities
+
+
+def test_login(monkeypatch):
+    assert True
