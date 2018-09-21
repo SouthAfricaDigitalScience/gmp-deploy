@@ -19,17 +19,24 @@ def test_setup_empty_env():
                     'TARBALL': 'tarball.tar.gz',
                     'ZENODO_API_KEY': '101010101'})
 def test_setup_fake_env():
-    assert p.setup()
+    zenodo_key, data = p.setup()
+    assert zenodo_key == "101010101"
+    assert data == {'filename': 'tarball.tar.gz'}
 
 
-@mock.patch.dict(os.environ, {'SHELL': '/bin/bash',
-                              'PWD': '/home/becker/SAGrid-2.0/gmp-deploy'})
-def test_setup_no_env():
-    with pytest.raises(SystemExit) as no_vars:
+def test_setup_no_tarball(monkeypatch):
+    monkeypatch.delenv('TARBALL', raising=True)
+    with pytest.raises(SystemExit) as e:
         p.setup()
-        assert str(no_vars) == "please set TARBALL environment \
-        variable to the file you want to upload"
-        print os.environ['TARBALL']
+
+
+def test_setup_no_zenodo(monkeypatch):
+    monkeypatch.delenv('ZENODO_API_KEY', raising=True)
+    with pytest.raises(SystemExit) as e:
+        p.setup()
+    assert e.type == SystemExit
+    assert e.value.code == 2
+    
 
 
 def test_metadata():

@@ -12,21 +12,13 @@ def setup():
     try:
         data = {'filename': os.environ['TARBALL']}
     except KeyError:
-        print "please set TARBALL environment variable to the file you \
-want to upload"
-        sys.exit(1)
-    try:
-        assert(os.environ['TARBALL'] is not None)
-    except ValueError:
-        sys.exit(1)
+        print "Tarball environment var is missing : TARBALL"
+        sys.exit(2)
     try:
         zenodo_token = os.environ['ZENODO_API_KEY']
     except KeyError:
-        sys.exit(1)
-    try:
-        assert(zenodo_token is not None)
-    except ValueError:
-        sys.exit(1)
+        print "Please set the ZENODO_API_KEY environment variable"
+        sys.exit(2)
     return zenodo_token, data
 
 
@@ -46,7 +38,8 @@ def main():
     zenodo_token, data = setup()
     # files = {'file': open(os.environ['TARBALL'], 'rb')}
     print uri
-    # response = login_to_zenodo(zenodo_token)
+    response = login_to_zenodo(zenodo_token)
+    print response.json()
 
 
 if __name__ == '__main__':
