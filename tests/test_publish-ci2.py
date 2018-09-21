@@ -31,13 +31,13 @@ def test_setup_no_tarball(monkeypatch):
     assert e.type == SystemExit
     assert e.value.code == 2
 
+
 def test_setup_no_zenodo(monkeypatch):
     monkeypatch.delenv('ZENODO_API_KEY', raising=True)
     with pytest.raises(SystemExit) as e:
         p.setup()
     assert e.type == SystemExit
     assert e.value.code == 2
-    
 
 
 def test_metadata():
