@@ -52,7 +52,8 @@ def test_metadata():
     access_right = jmespath.search('metadata.access_right', metadata)
     lic = jmespath.search('metadata.license', metadata)
     upload_type = jmespath.search('metadata.publication_type', metadata)
-    communities = jmespath.search('metadata.communities[*].identifier', metadata)
+    communities = jmespath.search('metadata.communities[*].identifier',
+                                  metadata)
     assert access_right == 'open'
     assert lic == 'Apache-2.0'
     assert upload_type == 'softwaredocumentation'
