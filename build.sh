@@ -22,7 +22,7 @@ echo "REPO_DIR is $REPO_DIR"
 echo "SRC_DIR is $SRC_DIR"
 echo "WORKSPACE is $WORKSPACE"
 echo "SOFT_DIR is $SOFT_DIR"
-mkdir -p ${WORKSPACE}
+mkdir -p "${WORKSPACE}"
 tar xjf  "${SRC_DIR}/${SOURCE_FILE}" -C "${WORKSPACE}" --skip-old-files
 mkdir -vp "${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}"
 cd "${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}"
