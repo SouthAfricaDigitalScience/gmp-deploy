@@ -19,17 +19,18 @@ pipeline {
                source /home/jenkins/python2/bin/activate
                flake8
                """
+            
           }
         }
-        stage('Python 2 Unit Tests') {
-          agent { label 'testbench' }
-          steps {
-            sh """
-              source /home/jenkins/python2/bin/activate
-              pytest
-              """
-          }
-        }
+        // stage('Python 2 Unit Tests') {
+        //   agent { label 'testbench' }
+        //   steps {
+        //     sh """
+        //       source /home/jenkins/python2/bin/activate
+        //       pytest
+        //       """
+        //   }
+        // }
       //   stage('Python 3 Unit Tests') {
       //     agent { label 'testbench' }
       //     steps {
