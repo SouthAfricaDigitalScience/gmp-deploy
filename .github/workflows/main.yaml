@@ -6,9 +6,26 @@ on:
   pull_request:
     branches:
       - main
+env:
+  ARCH: x86_64
+  SITE: generic
+  NAME: gmp
+  SRC_URL: https://gmplib.org/download/gmp/
+
+
 jobs:
-  initial:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 6.1.2
+          - 6.2.1
+        ARCH:
+          -
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: build
+        run: "echo nothing"
