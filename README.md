@@ -1,7 +1,7 @@
 # gmp-deploy
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f45600bd9b3c4fb99713a3fa5124199b)](https://app.codacy.com/app/brucellino/gmp-deploy?utm_source=github.com&utm_medium=referral&utm_content=SouthAfricaDigitalScience/gmp-deploy&utm_campaign=Badge_Grade_Settings)
- [![DOI](https://zenodo.org/badge/29038756.svg)](https://zenodo.org/badge/latestdoi/29038756)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/SouthAfricaDigitalScience/gmp-deploy/main.svg)](https://results.pre-commit.ci/latest/github/SouthAfricaDigitalScience/gmp-deploy/main)
+[![DOI](https://zenodo.org/badge/29038756.svg)](https://zenodo.org/badge/latestdoi/29038756)
 
 The repository that contains the [GNU multiple precision arithmetic library](https://gmplib.org/) for CODE-RADE
 
