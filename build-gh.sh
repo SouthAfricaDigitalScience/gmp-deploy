@@ -18,8 +18,9 @@ echo "REPO_DIR is ${REPO_DIR}"
 echo "SRC_DIR is ${SRC_DIR}"
 echo "GITHUB_WORKSPACE is ${GITHUB_WORKSPACE}"
 echo "SOFT_DIR is ${SOFT_DIR}"
-
-curl "${SRC_URL}/${SOURCE_FILE}" | tar xfvj -
+echo "${SOURCE_FILE}"
+echo curl -fSL "${SRC_URL}/${SOURCE_FILE}" | tar xfvj -
+curl -fSL "${SRC_URL}/${SOURCE_FILE}" | tar xfvj -
 ls -lht
 mkdir -vp "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
 cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
