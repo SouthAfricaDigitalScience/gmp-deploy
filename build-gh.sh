@@ -1,4 +1,5 @@
-#!/bin/bash -e
+#!/bin/bash
+set -eou pipefail
 # Copyright 2023 Bruce Becker
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-echo "REPO_DIR is $REPO_DIR"
-echo "SRC_DIR is $SRC_DIR"
-echo "GITHUB_WORKSPACE is $GITHUB_WORKSPACE"
-echo "SOFT_DIR is $SOFT_DIR"
-mkdir -p "${GITHUB_WORKSPACE}"
-tar xjf "${SRC_DIR}/${SOURCE_FILE}" -C "${GITHUB_WORKSPACE}" --skip-old-files
-mkdir -vp "${GITHUB_WORKSPACE}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
-cd "${GITHUB_WORKSPACE}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
+echo "REPO_DIR is ${REPO_DIR}"
+echo "SRC_DIR is ${SRC_DIR}"
+echo "GITHUB_WORKSPACE is ${GITHUB_WORKSPACE}"
+echo "SOFT_DIR is ${SOFT_DIR}"
+
+curl "${SRC_URL}/${SOURCE_FILE}" | tar xfvz -
+ls -lht
+mkdir -vp "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
+cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
 ../configure ABI=64 \
   --with-gnu-ld \
   --enable-static=yes \
