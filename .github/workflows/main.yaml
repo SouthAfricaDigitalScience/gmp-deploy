@@ -7,13 +7,13 @@ on:
     branches:
       - main
 env:
-  REPO_DIR: ${{ vars.REPO_DIR }}
   ARCH: x86_64
   SITE: generic
   NAME: gmp
   SRC_URL: https://gmplib.org/download/gmp/
-  SRC_DIR: "${{ var.SRC_DIR }}"
-  SOFT_DIR: "${{ var.SOFT_DIR }}"
+  SRC_DIR: ${{ var.SRC_DIR }}
+  SOFT_DIR: ${{ var.SOFT_DIR }}
+  REPO_DIR: ${{ var.REPO_DIR }}
 
 jobs:
   build:
