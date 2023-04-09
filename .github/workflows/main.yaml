@@ -12,7 +12,8 @@ env:
   SITE: generic
   NAME: gmp
   SRC_URL: https://gmplib.org/download/gmp/
-  SOURCE_FILE: "${NAME}-${VERSION}.tar.bz2"
+  SRC_DIR: "${{ var.SRC_DIR }}"
+  SOFT_DIR: "${{ var.SOFT_DIR }}"
 
 jobs:
   build:
@@ -28,3 +29,5 @@ jobs:
         uses: actions/checkout@v3
       - name: build
         run: "bash build-gh.sh"
+        env:
+          SOURCE_FILE: "${NAME}-${VERSION}.tar.bz2"
