@@ -35,4 +35,4 @@ cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
   --prefix="${SOFT_DIR}"
 make -j2
 
-make test
+make check
