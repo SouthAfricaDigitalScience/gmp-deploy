@@ -11,9 +11,9 @@ env:
   SITE: generic
   NAME: gmp
   SRC_URL: https://gmplib.org/download/gmp/
-  SRC_DIR: ${{ var.SRC_DIR }}
-  SOFT_DIR: ${{ var.SOFT_DIR }}
-  REPO_DIR: ${{ var.REPO_DIR }}
+  SRC_DIR: ${{ vars.SRC_DIR }}
+  SOFT_DIR: ${{ vars.SOFT_DIR }}
+  REPO_DIR: ${{ vars.REPO_DIR }}
 
 jobs:
   build:
