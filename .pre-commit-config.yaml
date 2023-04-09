@@ -28,3 +28,6 @@ repos:
           - "@commitlint/config-conventional"
 ci:
   autofix_prs: true
+  skip:
+    - shellcheck
+    - shmft
