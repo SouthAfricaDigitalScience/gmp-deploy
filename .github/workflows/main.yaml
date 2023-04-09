@@ -22,7 +22,8 @@ jobs:
           - 6.1.2
           - 6.2.1
         ARCH:
-          -
+          - x86_64
+          - arm64
     runs-on: ubuntu-latest
     steps:
       - name: checkout

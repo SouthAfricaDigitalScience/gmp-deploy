@@ -30,4 +30,4 @@ ci:
   autofix_prs: true
   skip:
     - shellcheck
-    - shmft
+    - shfmt
