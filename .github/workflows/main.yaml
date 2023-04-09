@@ -30,4 +30,4 @@ jobs:
       - name: build
         run: "bash build-gh.sh"
         env:
-          SOURCE_FILE: "${{ env.NAME }}-${{ env.VERSION }}.tar.bz2"
+          SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
