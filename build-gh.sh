@@ -34,3 +34,5 @@ cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
   --enable-fat \
   --prefix="${SOFT_DIR}"
 make -j2
+
+make test
