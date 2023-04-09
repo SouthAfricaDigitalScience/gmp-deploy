@@ -37,6 +37,6 @@ See the [pipeline file](Jenkinsfile) for the pipeline definition
 
 ## Citing
 
-Cite as : 
+Cite as :
 
 > Bruce Becker. (2018, August 29). SouthAfricaDigitalScience/gmp-deploy: GMP for CODE-RADE Foundation Release 4 (Version v0.2.0-fr4). Zenodo. http://doi.org/10.5281/zenodo.1405240
