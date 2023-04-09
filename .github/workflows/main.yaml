@@ -11,7 +11,9 @@ env:
   SITE: generic
   NAME: gmp
   SRC_URL: https://gmplib.org/download/gmp/
-
+  SRC_DIR: ${{ vars.SRC_DIR }}
+  SOFT_DIR: ${{ vars.SOFT_DIR }}
+  REPO_DIR: ${{ vars.REPO_DIR }}
 
 jobs:
   build:
@@ -21,12 +23,12 @@ jobs:
         version:
           - 6.1.2
           - 6.2.1
-        ARCH:
-          - x86_64
-          - arm64
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
       - name: build
-        run: "echo nothing"
+        run: "bash build-gh.sh"
+        env:
+          SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
+          VERSION: ${{ matrix.version }}
