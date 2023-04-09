@@ -19,7 +19,7 @@ pipeline {
                source /home/jenkins/python2/bin/activate
                flake8
                """
-            
+
           }
         }
         // stage('Python 2 Unit Tests') {
@@ -59,8 +59,8 @@ pipeline {
                 echo "${SRC_DIR}/${SRC_FILE} not present"
                 touch "${SRC_DIR}/${SRC_FILE}.lock"
                 sh 'wget ${SRC_URL}/${SRC_FILE} -O ${SRC_DIR}/${SRC_FILE}'
-                sh 'rm ${SRC_DIR}/${SRC_FILE}.lock' 
-              }     
+                sh 'rm ${SRC_DIR}/${SRC_FILE}.lock'
+              }
               else if(fileExists("${SRC_DIR}/${SRC_FILE}.lock"))
                 while (!fileExists("${SRC_DIR}/${SRC_FILE}.lock")) {
                   sh 'file busy downloading there'
@@ -93,9 +93,9 @@ pipeline {
             VERSION = '6.1.2'
             WORKSPACE = "${'/home/jenkins/workspace/' + env.NAME + '/' + env.VERSION + '/' + env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label 'centos6' }
           steps {
@@ -114,9 +114,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos6" }
           steps {
@@ -132,9 +132,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos7" }
           steps {
@@ -150,9 +150,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
+          options {
             retry(3)
-            skipDefaultCheckout() 
+            skipDefaultCheckout()
           }
           agent { label "centos7" }
           steps {
@@ -168,9 +168,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1404" }
           steps {
@@ -186,9 +186,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1404" }
           steps {
@@ -204,9 +204,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1610" }
           steps {
@@ -222,9 +222,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1610" }
           steps {
@@ -244,9 +244,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos6" }
           steps {
@@ -262,9 +262,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos6" }
           steps {
@@ -280,9 +280,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos7" }
           steps {
@@ -298,9 +298,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "centos7" }
           steps {
@@ -316,9 +316,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1404" }
           steps {
@@ -334,9 +334,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1404" }
           steps {
@@ -352,9 +352,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1610" }
           steps {
@@ -370,9 +370,9 @@ pipeline {
                             env.VERSION + '/' + \
                             env.OS}"
           }
-          options { 
-            retry(3) 
-            skipDefaultCheckout() 
+          options {
+            retry(3)
+            skipDefaultCheckout()
           }
           agent { label "u1610" }
           steps {
@@ -392,9 +392,9 @@ pipeline {
         ZENODO_API_KEY = credentials('zenodo_access_token')
         PATH = "$PATH:$HOME/.local/bin"
       }
-      options { 
-        retry(3) 
-        skipDefaultCheckout() 
+      options {
+        retry(3)
+        skipDefaultCheckout()
       }
       agent { label 'dockyard' }
       steps {
@@ -419,9 +419,9 @@ pipeline {
                             + env.VERSION + '/' \
                             + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label 'centos6' }
             steps {
@@ -436,9 +436,9 @@ pipeline {
                               env.NAME + '/' + env.VERSION + \
                               '/' + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "centos6" }
             steps {
@@ -454,9 +454,9 @@ pipeline {
                               '/' + env.VERSION + \
                               '/' + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "centos7" }
             steps {
@@ -472,9 +472,9 @@ pipeline {
                               + '/' + env.VERSION \
                               + '/' + env.OS}"
             }
-            options { 
+            options {
               retry(3)
-              skipDefaultCheckout() 
+              skipDefaultCheckout()
             }
             agent { label "centos7" }
             steps {
@@ -490,9 +490,9 @@ pipeline {
                               + '/' + env.VERSION \
                               + '/' + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "u1404" }
             steps {
@@ -508,9 +508,9 @@ pipeline {
                               + '/' + env.VERSION \
                               + '/' + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "u1404" }
             steps {
@@ -526,9 +526,9 @@ pipeline {
                               + '/' + env.VERSION \
                               + '/' + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "u1610" }
             steps {
@@ -544,9 +544,9 @@ pipeline {
                               + env.VERSION + '/' \
                               + env.OS}"
             }
-            options { 
-              retry(3) 
-              skipDefaultCheckout() 
+            options {
+              retry(3)
+              skipDefaultCheckout()
             }
             agent { label "u1610" }
             steps {
