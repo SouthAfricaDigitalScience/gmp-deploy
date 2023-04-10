@@ -9,4 +9,5 @@ plugins:
       assets:
         - CHANGELOG.md
         - README.md
+        - install-artifacts.zip
   - '@semantic-release/github'

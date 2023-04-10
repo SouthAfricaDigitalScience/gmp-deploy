@@ -57,6 +57,12 @@ jobs:
     needs:
       - build
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Get install artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: install-artifacts
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
