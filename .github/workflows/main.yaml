@@ -41,7 +41,7 @@ jobs:
           path: |
              ${{ github.workspace }}/**/.libs/libgmp*.so
              ${{ github.workspace }}/**/.libs/libgmp*.a
-      - name: build
+      - name: check build
         run: "sudo -E bash check-build-gh.sh"
         env:
           VERSION: ${{ matrix.version }}
@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: install-artifacts
-          path: ${{ env.REPO_DIR }}
+          path: ${{ env.REPO_DIR }}/**
   release:
     runs-on: ubuntu-latest
     needs:
