@@ -32,3 +32,42 @@ jobs:
         env:
           SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
           VERSION: ${{ matrix.version }}
+      - name: find the libs
+        run: find . -name "*.a"
+      - name: cache build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+             ${{ github.workspace }}/**/.libs/libgmp*.so
+             ${{ github.workspace }}/**/.libs/libgmp*.a
+      - name: check build
+        run: "sudo -E bash check-build-gh.sh"
+        env:
+          VERSION: ${{ matrix.version }}
+      - name: Make delivery tarball
+        run: tree ${{ env.SOFT_DIR }} ; tar cvfz delivery.tar.gz ${{ env.SOFT_DIR }}
+      - name: cache install
+        uses: actions/upload-artifact@v3
+        with:
+          name: install-artifacts
+          path: delivery.tar.gz
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Get install artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: install-artifacts
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/hydrogen"
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
