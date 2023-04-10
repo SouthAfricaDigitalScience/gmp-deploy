@@ -32,6 +32,8 @@ jobs:
         env:
           SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
           VERSION: ${{ matrix.version }}
+      - name: find the libs
+        run: find . -name "*.a"
       - name: cache build
         uses: actions/upload-artifact@v3
         with:
