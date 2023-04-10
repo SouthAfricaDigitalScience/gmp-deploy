@@ -41,7 +41,7 @@ jobs:
           path: |
              ${{ github.workspace }}/**/.libs/**
       - name: build
-        run: "sudo bash check-build-gh.sh"
+        run: "sudo -E bash check-build-gh.sh"
         env:
           VERSION: ${{ matrix.version }}
   release:
