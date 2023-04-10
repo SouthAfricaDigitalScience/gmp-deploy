@@ -49,8 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: install-artifacts
-          path: |
-            ${{ env.REPO_DIR }}/
+          path: "${{ env.REPO_DIR }}/"
   release:
     runs-on: ubuntu-latest
     needs:
