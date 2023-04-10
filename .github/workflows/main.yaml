@@ -32,3 +32,24 @@ jobs:
         env:
           SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
           VERSION: ${{ matrix.version }}
+      - name: cache build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+             ${{ github.workspace }}/**/.lib/**
+      - name: build
+        run: "bash check-build-gh.sh"
+        env:
+          VERSION: ${{ matrix.version }}
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/hydrogen"
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
