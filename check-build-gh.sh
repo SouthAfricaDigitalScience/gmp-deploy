@@ -19,9 +19,8 @@ cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
 echo $?
 
 make install
-mkdir -vp "${REPO_DIR}/libraries/${NAME}"
-(
-  cat <<MODULE_FILE
+mkdir -vp "${REPO_DIR}/libraries/${NAME}/modules"
+cat <<MODULE_FILE >"${REPO_DIR}/libraries/${NAME}/modules/${VERSION}"
 #%Module1.0
 ## $NAME modulefile
 ##
@@ -38,5 +37,4 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 prepend-path CFLAGS            "-I$::env(GMP_DIR)/include"
 prepend-path LDFLAGS           "-L$::env(GMP_DIR)/lib"
 MODULE_FILE
-) >"${REPO_DIR}/libraries/${NAME}/modules/${VERSION}"
 ls -lht "${REPO_DIR}/libraries/${NAME}/modules/${VERSION}"
