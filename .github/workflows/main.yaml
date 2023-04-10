@@ -45,11 +45,13 @@ jobs:
         run: "sudo -E bash check-build-gh.sh"
         env:
           VERSION: ${{ matrix.version }}
+      - name: Make delivery tarball
+        run: tar -cvfz delivery.tar.gz ${{ env.REPO_DIR }}
       - name: cache install
         uses: actions/upload-artifact@v3
         with:
           name: install-artifacts
-          path: "${{ env.REPO_DIR }}/"
+          path: delivery.tar.gz
   release:
     runs-on: ubuntu-latest
     needs:
