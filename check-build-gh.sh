@@ -38,5 +38,5 @@ prepend-path GCC_INCLUDE_DIR   $::env(GMP_DIR)/include
 prepend-path CFLAGS            "-I$::env(GMP_DIR)/include"
 prepend-path LDFLAGS           "-L$::env(GMP_DIR)/lib"
 MODULE_FILE
-) >"${LIBRARIES}/${NAME}/modules/${VERSION}"
-ls -lht "${LIBRARIES}/${NAME}/modules/${VERSION}"
+) >"${REPO_DIR}/libraries/${NAME}/modules/${VERSION}"
+ls -lht "${REPO_DIR}/libraries/${NAME}/modules/${VERSION}"
