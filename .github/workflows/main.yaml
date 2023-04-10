@@ -39,7 +39,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-             ${{ github.workspace }}/**/.lib/**
+             ${{ github.workspace }}/**/.libs/**
       - name: build
         run: "sudo bash check-build-gh.sh"
         env:
