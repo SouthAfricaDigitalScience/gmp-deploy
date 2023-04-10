@@ -46,7 +46,7 @@ jobs:
         env:
           VERSION: ${{ matrix.version }}
       - name: Make delivery tarball
-        run: tar -cvfz delivery.tar.gz ${{ env.REPO_DIR }}
+        run: tree ${{ env.SOFT_DIR }} ; tar cvfz delivery.tar.gz ${{ env.SOFT_DIR }}
       - name: cache install
         uses: actions/upload-artifact@v3
         with:
