@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: build
         run: "bash build-gh.sh"
         env:
@@ -58,7 +58,7 @@ jobs:
       - build
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get install artifacts
         uses: actions/download-artifact@v3
         with:
