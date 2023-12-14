@@ -35,7 +35,7 @@ jobs:
       - name: find the libs
         run: find . -name "*.a"
       - name: cache build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: |
@@ -48,7 +48,7 @@ jobs:
       - name: Make delivery tarball
         run: tree ${{ env.SOFT_DIR }} ; tar cvfz delivery.tar.gz ${{ env.SOFT_DIR }}
       - name: cache install
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: install-artifacts
           path: delivery.tar.gz
