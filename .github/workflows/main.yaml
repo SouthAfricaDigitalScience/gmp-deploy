@@ -50,7 +50,7 @@ jobs:
       - name: cache install
         uses: actions/upload-artifact@v4
         with:
-          name: install-artifacts
+          name: install-artifacts-${{ matrix.version }}
           path: delivery.tar.gz
   release:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
       - name: Get install artifacts
         uses: actions/download-artifact@v4
         with:
-          name: install-artifacts
+          name: install-artifacts**
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
