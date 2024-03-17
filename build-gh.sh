@@ -20,9 +20,9 @@ echo "GITHUB_WORKSPACE is ${GITHUB_WORKSPACE}"
 echo "SOFT_DIR is ${SOFT_DIR}"
 echo "${SOURCE_FILE}"
 echo "curl -fSL ${SRC_URL}/${SOURCE_FILE} | tar xfvj -"
-# curl -fSL ${SRC_URL}/${SOURCE_FILE} | tar xfvj -
-wget "${SRC_URL}/${SOURCE_FILE}"
-tar xvfz "$SOURCE_FILE"
+curl -fSL "${SRC_URL}/${SOURCE_FILE}" | tar xfvj -
+# wget "${SRC_URL}/${SOURCE_FILE}"
+# tar xvfz "$SOURCE_FILE"
 ls -lht
 mkdir -vp "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
 cd "${PWD}/${NAME}-${VERSION}/build-${GITHUB_RUN_ID}"
