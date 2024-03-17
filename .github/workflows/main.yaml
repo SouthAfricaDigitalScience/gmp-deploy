@@ -37,7 +37,7 @@ jobs:
       - name: cache build
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
+          name: build-artifacts-${{ matrix.version }}
           path: |
              ${{ github.workspace }}/**/.libs/libgmp*.so
              ${{ github.workspace }}/**/.libs/libgmp*.a
