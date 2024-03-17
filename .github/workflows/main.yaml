@@ -61,8 +61,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Get install artifacts
         uses: actions/download-artifact@v4
-        with:
-          name: install-artifacts**
+        # with:
+        #   name: install-artifacts**
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
