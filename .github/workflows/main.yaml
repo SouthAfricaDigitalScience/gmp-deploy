@@ -28,7 +28,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: build
-        run: "bash build-gh.sh"
+        run: "./build-gh.sh"
         env:
           SOURCE_FILE: "${{ env.NAME }}-${{ matrix.version }}.tar.bz2"
           VERSION: ${{ matrix.version }}
