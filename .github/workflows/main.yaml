@@ -10,7 +10,7 @@ env:
   ARCH: x86_64
   SITE: generic
   NAME: gmp
-  SRC_URL: https://gmplib.org/download/gmp/
+  SRC_URL: https://ftp.gnu.org/gnu/gmp
   SRC_DIR: ${{ vars.SRC_DIR }}
   SOFT_DIR: ${{ vars.SOFT_DIR }}
   REPO_DIR: ${{ vars.REPO_DIR }}
