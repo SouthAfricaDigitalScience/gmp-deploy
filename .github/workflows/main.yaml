@@ -35,7 +35,7 @@ jobs:
       - name: find the libs
         run: find . -name "*.a"
       - name: cache build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: build-artifacts-${{ matrix.version }}
           path: |
@@ -48,7 +48,7 @@ jobs:
       - name: Make delivery tarball
         run: tree ${{ env.SOFT_DIR }} ; tar cvfz delivery.tar.gz ${{ env.SOFT_DIR }}
       - name: cache install
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: install-artifacts-${{ matrix.version }}
           path: delivery.tar.gz
@@ -60,7 +60,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: Get install artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         # with:
         #   name: install-artifacts**
       - name: Setup Node.js
