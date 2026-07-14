@@ -64,7 +64,7 @@ jobs:
         # with:
         #   name: install-artifacts**
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/iron"
       - name: Release
